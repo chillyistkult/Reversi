@@ -35,14 +35,14 @@
     </property>
     <widget class="QMenu" name="menuNewGame">
      <property name="title">
-      <string>New Game</string>
+      <string>New game</string>
      </property>
      <widget class="QMenu" name="menuPlayerVsAI">
       <property name="title">
-       <string>You vs. AI</string>
+       <string>Player vs AI</string>
       </property>
-      <addaction name="actionPlay_as_White"/>
-      <addaction name="actionPlay_as_Black"/>
+      <addaction name="actionPlayWhite"/>
+      <addaction name="actionPlayBlack"/>
      </widget>
      <addaction name="menuPlayerVsAI"/>
      <addaction name="actionPlayerVsPlayer"/>
@@ -55,14 +55,14 @@
     <property name="title">
      <string>Options</string>
     </property>
-    <addaction name="actionAI_Settings"/>
+    <addaction name="actionSettings"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOptions"/>
   </widget>
   <action name="actionPlayerVsPlayer">
    <property name="text">
-    <string>Player versus Player</string>
+    <string>Player vs Player</string>
    </property>
   </action>
   <action name="actionAIVsAI">
@@ -70,19 +70,19 @@
     <string>AI vs AI</string>
    </property>
   </action>
-  <action name="actionPlay_as_White">
+  <action name="actionPlayWhite">
    <property name="text">
     <string>Play as White</string>
    </property>
   </action>
-  <action name="actionPlay_as_Black">
+  <action name="actionPlayBlack">
    <property name="text">
     <string>Play as Black</string>
    </property>
   </action>
-  <action name="actionAI_Settings">
+  <action name="actionSettings">
    <property name="text">
-    <string>AI Settings</string>
+    <string>Settings</string>
    </property>
   </action>
   <action name="actionExit">
@@ -96,7 +96,7 @@
   <customwidget>
    <class>BoardWidget</class>
    <extends>QWidget</extends>
-   <header>BoardWidget.h</header>
+   <header>boardwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
