@@ -9,16 +9,98 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>MainWindow</string>
+  <property name="windowTitle">
+   <string>Reversi</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="BoardWidget" name="widget" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuNewGame">
+     <property name="title">
+      <string>New Game</string>
+     </property>
+     <widget class="QMenu" name="menuPlayerVsAI">
+      <property name="title">
+       <string>You vs. AI</string>
+      </property>
+      <addaction name="actionPlay_as_White"/>
+      <addaction name="actionPlay_as_Black"/>
+     </widget>
+     <addaction name="menuPlayerVsAI"/>
+     <addaction name="actionPlayerVsPlayer"/>
+     <addaction name="actionAIVsAI"/>
+    </widget>
+    <addaction name="menuNewGame"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionAI_Settings"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuOptions"/>
+  </widget>
+  <action name="actionPlayerVsPlayer">
+   <property name="text">
+    <string>Player versus Player</string>
+   </property>
+  </action>
+  <action name="actionAIVsAI">
+   <property name="text">
+    <string>AI vs AI</string>
+   </property>
+  </action>
+  <action name="actionPlay_as_White">
+   <property name="text">
+    <string>Play as White</string>
+   </property>
+  </action>
+  <action name="actionPlay_as_Black">
+   <property name="text">
+    <string>Play as Black</string>
+   </property>
+  </action>
+  <action name="actionAI_Settings">
+   <property name="text">
+    <string>AI Settings</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>BoardWidget</class>
+   <extends>QWidget</extends>
+   <header>BoardWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
+
