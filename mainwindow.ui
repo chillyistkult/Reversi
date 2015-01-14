@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -26,68 +27,94 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>8</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Game</string>
     </property>
     <widget class="QMenu" name="menuNewGame">
-     <property name="title">
-      <string>New game</string>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
      </property>
-     <widget class="QMenu" name="menuPlayerVsAI">
+     <property name="title">
+      <string>New</string>
+     </property>
+     <widget class="QMenu" name="menuPlayerVsComputer">
       <property name="title">
-       <string>Player vs AI</string>
+       <string>Player vs. Computer</string>
       </property>
-      <addaction name="actionPlayWhite"/>
-      <addaction name="actionPlayBlack"/>
+      <addaction name="playAsWhite"/>
+      <addaction name="playAsBlack"/>
      </widget>
-     <addaction name="menuPlayerVsAI"/>
-     <addaction name="actionPlayerVsPlayer"/>
-     <addaction name="actionAIVsAI"/>
+     <addaction name="menuPlayerVsComputer"/>
+     <addaction name="playVsPlayer"/>
     </widget>
     <addaction name="menuNewGame"/>
-    <addaction name="actionExit"/>
+    <addaction name="settings"/>
+    <addaction name="exit"/>
    </widget>
-   <widget class="QMenu" name="menuOptions">
-    <property name="title">
-     <string>Options</string>
+   <widget class="QMenu" name="menuHelp">
+    <property name="enabled">
+     <bool>false</bool>
     </property>
-    <addaction name="actionSettings"/>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuOptions"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <action name="actionPlayerVsPlayer">
+  <action name="playVsPlayer">
    <property name="text">
-    <string>Player vs Player</string>
+    <string>Player vs. Player</string>
+   </property>
+   <property name="font">
+    <font/>
    </property>
   </action>
-  <action name="actionAIVsAI">
+  <action name="playAsWhite">
    <property name="text">
-    <string>AI vs AI</string>
+    <string>Play as white</string>
+   </property>
+   <property name="font">
+    <font/>
    </property>
   </action>
-  <action name="actionPlayWhite">
+  <action name="playAsBlack">
    <property name="text">
-    <string>Play as White</string>
+    <string>Play as black</string>
+   </property>
+   <property name="font">
+    <font/>
    </property>
   </action>
-  <action name="actionPlayBlack">
-   <property name="text">
-    <string>Play as Black</string>
-   </property>
-  </action>
-  <action name="actionSettings">
-   <property name="text">
-    <string>Settings</string>
-   </property>
-  </action>
-  <action name="actionExit">
+  <action name="exit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="settings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>
@@ -96,11 +123,10 @@
   <customwidget>
    <class>BoardWidget</class>
    <extends>QWidget</extends>
-   <header>boardwidget.h</header>
+   <header>BoardWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
 </ui>
-
