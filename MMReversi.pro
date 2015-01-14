@@ -16,12 +16,15 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     boardwidget.cpp \
     game.cpp \
-    board.cpp
+    board.cpp \
+    settings.cpp
 
 HEADERS  += mainwindow.h \
     boardwidget.h \
     boardwidget.h \
     game.h \
-    board.h
+    board.h \
+    settings.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    settings.ui
