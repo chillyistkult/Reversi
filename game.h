@@ -1,47 +1,44 @@
-
-#ifndef GAME_H
-#define GAME_H
+#ifndef game_h
+#define game_h
 
 #include <QSharedPointer>
 #include <QObject>
 
-enum CELL_STATE
-{
-    EMPTY_CELL=0,
-    WHITE_CELL=1,
-    BLACK_CELL=2
-};
-
-struct BoardPosition
-{
-    quint8 x;
-    quint8 y;
-};
+#include "board.h"
 
 class Game : public QObject
 {
     Q_OBJECT
 public:
     Game();
+    Game(CELL_STATE player);
     virtual ~Game();
+
+    QSharedPointer<Board> getBoard() const;
 
 signals:
     void turnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
-    void scoreChanged(quint16 white, quint16 black);
+    void scoreChanged(int white, int black);
     void gameOver(CELL_STATE winner);
 
 public slots:
-    virtual void cellClicked(BoardPosition where);
-    virtual void setBlackAIDepth(quint8 depth);
-    virtual void setWhiteAIDepth(quint8 depth);
+    virtual void handleCellClicked(BoardPosition where);
+    virtual void setDifficulty(int level);
 
 private slots:
     virtual void handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
-    virtual void gameOver(CELL_STATE winner);
-    virtual void scoreChanged(quint16 white, quint16 black);
+    virtual void _gameOver(CELL_STATE winner);
+    virtual void handleScoreChanged(int white, int black);
+    virtual void makeAIMove();
 
 
 protected:
+    void setBoard(QSharedPointer<Board> nBoard);
 
+private:
+    QSharedPointer<Board> board;
+    CELL_STATE aiPlayer;
+    CELL_STATE player;
+};
 
-#endif // REVERSIGAME_H
+#endif // game_h

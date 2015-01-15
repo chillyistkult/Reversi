@@ -69,18 +69,13 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
     }
 }
 
-//private slot
 void Game::_gameOver(CELL_STATE winner)
 {
-    Q_UNUSED(winner);
     //this->gameOver(winner);
 }
 
-//private slot
 void Game::handleScoreChanged(int white, int black)
 {
-    Q_UNUSED(white);
-    Q_UNUSED(black);
     //this->scoreChanged(white,black);
 }
 
