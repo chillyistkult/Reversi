@@ -10,20 +10,16 @@ public:
 
     BoardWidget(QWidget * parent = 0);
 
-    //virtual from QWidget
     QSize sizeHint() const;
 
     void setBoard(QSharedPointer<Board> board);
     QSharedPointer<Board> getBoard() const;
 
 protected:
-    //virtual from QWidget
     void paintEvent(QPaintEvent *);
 
-    //virtual from QWidget
     void mouseReleaseEvent(QMouseEvent *);
 
-    //virtual from QWidget
     void mousePressEvent(QMouseEvent *);
 
 
