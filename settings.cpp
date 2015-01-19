@@ -1,39 +1,26 @@
-#ifndef Settings_H
-#define Settings_H
+#include "Settings.h"
+#include "ui_settings.h"
 
-#include <QWidget>
-
-namespace Ui {
-    class Settings;
+Settings::Settings(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Settings)
+{
+    ui->setupUi(this);
 }
 
-struct Options
+Settings::~Settings()
 {
-    int difficulty;
-};
+    delete ui;
+}
 
-class Settings : public QWidget
+void Settings::setDifficulty(int level)
 {
-    Q_OBJECT
+   // this->options.difficulty = this->ui->difficultyBox->findData(level);
+}
 
-public:
-    explicit Settings(QWidget *parent = 0);
-    ~Settings();
-
-    void setDifficulty(int level);
-
-    int getDifficulty() const;
-
-signals:
-    void difficultyBoxChanged(int level);
-    void optionsChanged(Options options);
-
-private slots:
-    void on_difficultyBox_currentIndexChanged(int arg1);
-
-private:
-    Ui::Settings *ui;
-    Options options;
-};
-
-#endif // Settings_H
+void Settings::on_difficultyBox_currentIndexChanged(int arg1)
+{
+    this->difficultyBoxChanged(arg1);
+    this->options.difficulty = arg1;
+    this->optionsChanged(this->options);
+}
