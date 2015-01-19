@@ -21,8 +21,7 @@ public:
     ~Settings();
 
     void setDifficulty(int level);
-
-    int getDifficulty() const;
+    int getDifficulty();
 
 signals:
     void difficultyBoxChanged(int level);

@@ -24,3 +24,4 @@ void Settings::on_difficultyBox_currentIndexChanged(int arg1)
     this->options.difficulty = arg1;
     this->optionsChanged(this->options);
 }
+
