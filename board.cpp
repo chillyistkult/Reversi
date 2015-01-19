@@ -452,17 +452,12 @@ BoardPosition Board::getBestMove() const
     return this->bestMove;
 }
 
-void Board::calculateBestMove(CELL_STATE player,int levels)
+void Board::calculateBestMove(CELL_STATE player,int difficulty)
 {
-    Q_UNUSED(player);
-
     QSharedPointer<Board> board(new Board(*this));
-    Minimax search(board,levels);
-    search.search();
-    //qDebug() << "For player" << player;
-    //qDebug() << "Best move has score" << bestScore;
-    this->bestMove = search.getBestMove();
-    //qDebug() << this->bestMove.x << this->bestMove.y;
+    Minimax minimax(board, difficulty);
+    minimax.search();
+    this->bestMove = minimax.getBestMove();
 }
 
 //private

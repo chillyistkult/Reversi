@@ -5,6 +5,7 @@
 #include "game.h"
 
 #include <QtDebug>
+#include <QSound>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -42,21 +43,22 @@ void MainWindow::on_playVsPlayer_triggered()
 {
     newGameDialog gameDialog(this);
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(), 1)));
+    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(), gameDialog.getDifficulty())));
 }
 
 void MainWindow::on_playAsWhite_triggered()
 {
+    QSound::play(":/sound/win.wav");
     newGameDialog gameDialog(this);
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(WHITE, gameDialog.getBoardSize(), 1)));
+    this->setGame(QSharedPointer<Game>(new Game(WHITE, gameDialog.getBoardSize(), gameDialog.getDifficulty())));
 }
 
 void MainWindow::on_playAsBlack_triggered()
 {
     newGameDialog gameDialog(this);
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(BLACK, gameDialog.getBoardSize(), 1)));
+    this->setGame(QSharedPointer<Game>(new Game(BLACK, gameDialog.getBoardSize(), gameDialog.getDifficulty())));
 }
 
 void MainWindow::setGame(QSharedPointer<Game> game)

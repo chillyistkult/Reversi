@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/sound">
+        <file alias="win.wav">resources/win.wav</file>
+        <file alias="gameover.wav">resources/gameover.wav</file>
+        <file alias="doh.wav">resources/doh.wav</file>
+    </qresource>
+</RCC>

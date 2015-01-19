@@ -7,7 +7,7 @@
 class Minimax
 {
 public:
-    Minimax(QSharedPointer<Board> rootNode,int maxDepth = 1);
+    Minimax(QSharedPointer<Board> rootNode,int maxDepth);
     virtual ~Minimax();
 
     int search();
