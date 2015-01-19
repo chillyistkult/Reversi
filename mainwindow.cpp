@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Settings.h"
+#include "newgamedialog.h"
 
 #include "game.h"
 
@@ -40,51 +40,27 @@ void MainWindow::gameOver(CELL_STATE)
 
 void MainWindow::on_playVsPlayer_triggered()
 {
-    this->setGame(QSharedPointer<Game>(new Game()));
+    newGameDialog gameDialog(this);
+    gameDialog.exec();
+    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(), 1)));
 }
 
 void MainWindow::on_playAsWhite_triggered()
 {
-    this->setGame(QSharedPointer<Game>(new Game(WHITE)));
+    newGameDialog gameDialog(this);
+    gameDialog.exec();
+    this->setGame(QSharedPointer<Game>(new Game(WHITE, gameDialog.getBoardSize(), 1)));
 }
 
 void MainWindow::on_playAsBlack_triggered()
 {
-    this->setGame(QSharedPointer<Game>(new Game(BLACK)));
-}
-
-void MainWindow::on_settings_triggered()
-{
-    Settings * widget = new Settings();
-    widget->setAttribute(Qt::WA_DeleteOnClose);
-
-    widget->setDifficulty(options.difficulty);
-
-    connect(widget,
-            SIGNAL(optionsChanged(Options)),
-            this,
-            SLOT(changeOptions(Options)));
-
-    widget->show();
-}
-
-void MainWindow::changeOptions(Options options)
-{
-    if (game.isNull()) {
-        return;
-    }
-    this->options = options;
-    game->setDifficulty(options.difficulty);
+    newGameDialog gameDialog(this);
+    gameDialog.exec();
+    this->setGame(QSharedPointer<Game>(new Game(BLACK, gameDialog.getBoardSize(), 1)));
 }
 
 void MainWindow::setGame(QSharedPointer<Game> game)
 {
-    if (game.isNull()) {
-        return;
-    }
-
-    this->changeOptions(this->options);
-
     this->ui->widget->setBoard(game->getBoard());
 
     Game * raw = game.data();

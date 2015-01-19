@@ -2,7 +2,6 @@
 
 #include "board.h"
 #include "game.h"
-#include "Settings.h"
 
 namespace Ui {
     class MainWindow;
@@ -27,15 +26,10 @@ private slots:
 
     void on_playAsBlack_triggered();
 
-    void on_settings_triggered();
-
-    void changeOptions(Options options);
-
     void on_exit_triggered();
 
 private:
     void setGame(QSharedPointer<Game> game);
     Ui::MainWindow *ui;
     QSharedPointer<Game> game;
-    Options options;
 };

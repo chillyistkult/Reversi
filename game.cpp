@@ -4,17 +4,19 @@
 #include <QtGlobal>
 #include <QtDebug>
 
-int difficulty = 3;
 
-Game::Game()
+
+Game::Game(int boardSize, int difficulty)
 {
-    this->setBoard(QSharedPointer<Board>(new Board(8)));
+    this->difficulty = difficulty;
+    this->setBoard(QSharedPointer<Board>(new Board(boardSize)));
 }
 
 
-Game::Game(CELL_STATE player) : player(player)
+Game::Game(CELL_STATE player, int boardSize, int difficulty) : player(player)
 {
-    this->setBoard(QSharedPointer<Board>(new Board(8)));
+    this->difficulty = difficulty;
+    this->setBoard(QSharedPointer<Board>(new Board(boardSize)));
     if (player == WHITE) {
         this->aiPlayer = BLACK;
     }
@@ -39,23 +41,6 @@ void Game::handleCellClicked(BoardPosition where)
     this->board->makeMove(where, this->board->getWhoIsNext());
 }
 
-void Game::setDifficulty(int level)
-{
-    switch(level) {
-        case 0:
-            difficulty = 3;
-            break;
-        case 1:
-            difficulty = 5;
-            break;
-        case 2:
-            difficulty = 19;
-            break;
-        default:
-            break;
-    }
-}
-
 void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
 {
     qDebug() << this->getBoard()->getScore();
@@ -69,18 +54,13 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
     }
 }
 
-//private slot
 void Game::_gameOver(CELL_STATE winner)
 {
-    Q_UNUSED(winner);
     //this->gameOver(winner);
 }
 
-//private slot
 void Game::handleScoreChanged(int white, int black)
 {
-    Q_UNUSED(white);
-    Q_UNUSED(black);
     //this->scoreChanged(white,black);
 }
 
@@ -93,15 +73,15 @@ void Game::makeAIMove()
     if (this->aiPlayer == WHITE) {
             this->getBoard()->calculateBestMove(this->aiPlayer, difficulty);
     }
-    this->getBoard()->makeMove(this->getBoard
-                               ()->getBestMove(),this->aiPlayer);
+    this->getBoard()->makeMove(this->getBoard()->getBestMove(),this->aiPlayer);
 }
 
 //private
 void Game::setBoard(QSharedPointer<Board> nBoard)
 {
-    if (nBoard.isNull())
+    if (nBoard.isNull()) {
         return;
+    }
 
     Board * raw = nBoard.data();
     connect(raw,

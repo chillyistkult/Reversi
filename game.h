@@ -10,8 +10,8 @@ class Game : public QObject
 {
     Q_OBJECT
 public:
-    Game();
-    Game(CELL_STATE player);
+    Game(int boardSize, int difficulty);
+    Game(CELL_STATE player, int boardSize, int difficulty);
     virtual ~Game();
 
     QSharedPointer<Board> getBoard() const;
@@ -23,7 +23,6 @@ signals:
 
 public slots:
     virtual void handleCellClicked(BoardPosition where);
-    virtual void setDifficulty(int level);
 
 private slots:
     virtual void handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
@@ -39,6 +38,7 @@ private:
     QSharedPointer<Board> board;
     CELL_STATE aiPlayer;
     CELL_STATE player;
+    int difficulty;
 };
 
 #endif // game_h

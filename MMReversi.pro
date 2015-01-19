@@ -17,16 +17,16 @@ SOURCES += main.cpp \
     boardwidget.cpp \
     game.cpp \
     board.cpp \
-    settings.cpp \
-    minimax.cpp
+    minimax.cpp \
+    newgamedialog.cpp
 
 HEADERS  += mainwindow.h \
     boardwidget.h \
     boardwidget.h \
     game.h \
     board.h \
-    settings.h \
-    minimax.h
+    minimax.h \
+    newgamedialog.h
 
 FORMS    += mainwindow.ui \
-    settings.ui
+    newgamedialog.ui

@@ -5,8 +5,7 @@
 #include <QtDebug>
 #include "Minimax.h"
 
-BoardWidget::BoardWidget(QSharedPointer<Board> board,
-                                       QWidget *parent) :
+BoardWidget::BoardWidget(QSharedPointer<Board> board, QWidget *parent) :
     QWidget(parent), showPossibleWhite(false), showPossibleBlack(false)
 {
     this->setBoard(board);
