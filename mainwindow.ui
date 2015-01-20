@@ -112,15 +112,8 @@ color: rgb(255, 255, 255);</string>
      <property name="title">
       <string>New</string>
      </property>
-     <widget class="QMenu" name="menuPlayerVsComputer">
-      <property name="title">
-       <string>Player vs. Computer</string>
-      </property>
-      <addaction name="playAsWhite"/>
-      <addaction name="playAsBlack"/>
-     </widget>
-     <addaction name="menuPlayerVsComputer"/>
-     <addaction name="playVsPlayer"/>
+     <addaction name="actionPlayer_vs_Computer"/>
+     <addaction name="actionPlayer_vs_Player"/>
     </widget>
     <addaction name="menuNewGame"/>
     <addaction name="settings"/>
@@ -147,30 +140,6 @@ color: rgb(255, 255, 255);</string>
    <addaction name="menuHighscore"/>
    <addaction name="menuHelp"/>
   </widget>
-  <action name="playVsPlayer">
-   <property name="text">
-    <string>Player vs. Player</string>
-   </property>
-   <property name="font">
-    <font/>
-   </property>
-  </action>
-  <action name="playAsWhite">
-   <property name="text">
-    <string>Play as white</string>
-   </property>
-   <property name="font">
-    <font/>
-   </property>
-  </action>
-  <action name="playAsBlack">
-   <property name="text">
-    <string>Play as black</string>
-   </property>
-   <property name="font">
-    <font/>
-   </property>
-  </action>
   <action name="exit">
    <property name="text">
     <string>Exit</string>
@@ -187,6 +156,16 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Show</string>
+   </property>
+  </action>
+  <action name="actionPlayer_vs_Computer">
+   <property name="text">
+    <string>Player vs. Computer</string>
+   </property>
+  </action>
+  <action name="actionPlayer_vs_Player">
+   <property name="text">
+    <string>Player vs. Player</string>
    </property>
   </action>
  </widget>

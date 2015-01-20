@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "newgamedialog.h"
-
+#include "gamedialog.h"
 #include "game.h"
 
 #include <QtDebug>
@@ -21,7 +20,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::countChange(int white, int black)
 {
-    this->ui->statusBar->showMessage("White: " + QString::number(white) + " Black: " + QString::number(black));
+    this->ui->statusBar->showMessage(game->getPlayerName1() + ": " + QString::number(white) + "  " + game->getPlayerName2() + ": " + QString::number(black));
 }
 
 void MainWindow::gameOver(CELL_STATE)
@@ -29,6 +28,9 @@ void MainWindow::gameOver(CELL_STATE)
     int whiteScore = this->game->getBoard()->getWhiteCount();
     int blackScore = this->game->getBoard()->getBlackPoints();
     if (whiteScore > blackScore) {
+        if(this->game->getPlayersToken() == WHITE) {
+                QSound::play(":/sound/win.wav");
+        }
         this->ui->statusBar->showMessage("White wins " + QString::number(whiteScore) + " - " + QString::number(blackScore));
     }
     else if (blackScore > whiteScore) {
@@ -39,26 +41,18 @@ void MainWindow::gameOver(CELL_STATE)
     }
 }
 
-void MainWindow::on_playVsPlayer_triggered()
+void MainWindow::on_actionPlayer_vs_Player_triggered()
 {
-    newGameDialog gameDialog(this);
+    GameDialog gameDialog(this);
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(), gameDialog.getDifficulty())));
+    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(),gameDialog.getDifficulty(),gameDialog.getPlayerName1(),gameDialog.getPlayerName2())));
 }
 
-void MainWindow::on_playAsWhite_triggered()
+void MainWindow::on_actionPlayer_vs_Computer_triggered()
 {
-    QSound::play(":/sound/win.wav");
-    newGameDialog gameDialog(this);
+    GameDialog gameDialog(this);
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(WHITE, gameDialog.getBoardSize(), gameDialog.getDifficulty())));
-}
-
-void MainWindow::on_playAsBlack_triggered()
-{
-    newGameDialog gameDialog(this);
-    gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(BLACK, gameDialog.getBoardSize(), gameDialog.getDifficulty())));
+    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getToken(),gameDialog.getBoardSize(),gameDialog.getDifficulty(),gameDialog.getPlayerName1())));
 }
 
 void MainWindow::setGame(QSharedPointer<Game> game)

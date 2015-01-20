@@ -20,11 +20,9 @@ private slots:
 
     void gameOver(CELL_STATE);
 
-    void on_playVsPlayer_triggered();
+    void on_actionPlayer_vs_Player_triggered();
 
-    void on_playAsWhite_triggered();
-
-    void on_playAsBlack_triggered();
+    void on_actionPlayer_vs_Computer_triggered();
 
     void on_exit_triggered();
 

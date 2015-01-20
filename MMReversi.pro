@@ -18,7 +18,7 @@ SOURCES += main.cpp \
     game.cpp \
     board.cpp \
     minimax.cpp \
-    newgamedialog.cpp
+    gamedialog.cpp
 
 HEADERS  += mainwindow.h \
     boardwidget.h \
@@ -26,10 +26,10 @@ HEADERS  += mainwindow.h \
     game.h \
     board.h \
     minimax.h \
-    newgamedialog.h
+    gamedialog.h
 
 FORMS    += mainwindow.ui \
-    newgamedialog.ui
+    gamedialog.ui
 
 RESOURCES += \
     resources.qrc

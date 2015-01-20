@@ -4,4 +4,7 @@
         <file alias="gameover.wav">resources/gameover.wav</file>
         <file alias="doh.wav">resources/doh.wav</file>
     </qresource>
+    <qresource prefix="/">
+        <file>highscore.qml</file>
+    </qresource>
 </RCC>

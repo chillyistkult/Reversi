@@ -5,7 +5,7 @@
 #include <QtConcurrent/QtConcurrentRun>
 #include <QCoreApplication>
 
-#include "Minimax.h"
+#include "minimax.h"
 
 const int cornerPoints = 50;
 const int edgePoints = 2;

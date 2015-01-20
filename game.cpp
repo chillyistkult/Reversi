@@ -6,15 +6,20 @@
 
 
 
-Game::Game(int boardSize, int difficulty)
+Game::Game(int boardSize, int difficulty, QString playerName1, QString playerName2)
 {
+    this->playerName1 = playerName1;
+    this->playerName2 = playerName2;
     this->difficulty = difficulty;
     this->setBoard(QSharedPointer<Board>(new Board(boardSize)));
 }
 
 
-Game::Game(CELL_STATE player, int boardSize, int difficulty) : player(player)
+Game::Game(CELL_STATE player, int boardSize, int difficulty, QString playerName1) : player(player)
 {
+    this->playerName1 = playerName1;
+    this->playerName2 = "Computer";
+    this->player = player;
     this->difficulty = difficulty;
     this->setBoard(QSharedPointer<Board>(new Board(boardSize)));
     if (player == WHITE) {
@@ -35,6 +40,19 @@ QSharedPointer<Board> Game::getBoard() const
 {
     return this->board;
 }
+
+CELL_STATE Game::getPlayersToken() {
+    return this->player;
+}
+
+QString Game::getPlayerName1() {
+    return this->playerName1;
+}
+
+QString Game::getPlayerName2() {
+    return this->playerName2;
+}
+
 
 void Game::handleCellClicked(BoardPosition where)
 {

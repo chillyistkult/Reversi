@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QtDebug>
-#include "Minimax.h"
+#include "minimax.h"
 
 BoardWidget::BoardWidget(QSharedPointer<Board> board, QWidget *parent) :
     QWidget(parent), showPossibleWhite(false), showPossibleBlack(false)
@@ -46,13 +46,13 @@ void BoardWidget::paintEvent(QPaintEvent *)
 
     if (this->board.isNull())
     {
-        painter.fillRect(this->rect(),Qt::gray);
+        painter.fillRect(this->rect(), QColor(245,241,222,255));
         return;
     }
     const QColor bgColor = QColor(0,0,0,255);
-    const QColor boardColor = Qt::gray;
+    const QColor boardColor = QColor(245,241,222,255);
     const QColor gridColor = Qt::black;
-    const QColor whiteChipColor = Qt::white;
+    const QColor whiteChipColor = QColor(240,240,240,255);;
     const QColor blackChipColor = Qt::black;
 
     const int size = qMin(this->width(),this->height())-1;

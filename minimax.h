@@ -2,7 +2,6 @@
 
 #include <QSharedPointer>
 #include <QtGlobal>
-#include <QHash>
 
 class Minimax
 {

@@ -1,8 +1,9 @@
-#ifndef NEWGAMEDIALOG_H
-#define NEWGAMEDIALOG_H
+#ifndef GameDialog_H
+#define GameDialog_H
 
 #include <QDialog>
 #include <QPushButton>
+#include <board.h>
 
 namespace Ui {
 
@@ -12,22 +13,25 @@ struct Settings
 {
     int difficulty = 1;
     int boardSize = 8;
-    QString style = "default";
+    CELL_STATE token = WHITE;
 };
 
-class newGameDialog;
+class GameDialog;
 }
 
-class newGameDialog : public QDialog
+class GameDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit newGameDialog(QWidget *parent = 0);
-    ~newGameDialog();
+    explicit GameDialog(QWidget *parent = 0);
+    ~GameDialog();
 
     int getDifficulty();
     int getBoardSize();
+    CELL_STATE getToken();
+    QString getPlayerName1();
+    QString getPlayerName2();
 
 private slots:
 
@@ -39,11 +43,13 @@ private slots:
 
     void on_difficultyBox_currentIndexChanged(int index);
 
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
 private:
-    Ui::newGameDialog *ui;
+    Ui::GameDialog *ui;
     Ui::Settings settings;
     QString playerName1;
     QString playerName2;
 };
 
-#endif // NEWGAMEDIALOG_H
+#endif // GameDialog_H
