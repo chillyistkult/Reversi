@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "gamedialog.h"
 #include "game.h"
+#include "settings.h"
 
 #include <QtDebug>
 #include <QSound>
@@ -55,6 +56,12 @@ void MainWindow::on_actionPlayer_vs_Computer_triggered()
     GameDialog gameDialog(this);
     gameDialog.exec();
     this->setGame(QSharedPointer<Game>(new Game(gameDialog.getToken(),gameDialog.getBoardSize(),gameDialog.getDifficulty(),gameDialog.getPlayerName1())));
+}
+
+void MainWindow::on_actionSettings_triggered()
+{
+    Settings settings(this);
+    settings.exec();
 }
 
 void MainWindow::setGame(QSharedPointer<Game> game)

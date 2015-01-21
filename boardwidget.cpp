@@ -53,7 +53,7 @@ void BoardWidget::paintEvent(QPaintEvent *)
         return;
     }
     const QColor bgColor = QColor(0,0,0,255);
-    const QColor boardColor = QColor(255,222,173,255);
+    const QColor boardColor = QColor(222,184,135,255);
     const QColor gridColor = Qt::black;
     const QColor whiteChipColor = QColor(240,240,240,255);;
     const QColor blackChipColor = Qt::black;
@@ -102,7 +102,11 @@ void BoardWidget::paintEvent(QPaintEvent *)
                 //Style 1
                 //painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
                 //Style 2
-                painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
+                //painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
+                //Style 3
+                QImage image;
+                image.load(":/images/green.png");
+                painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
             }
             else if (cell == BLACK)
             {
@@ -111,7 +115,11 @@ void BoardWidget::paintEvent(QPaintEvent *)
                 //Style 1
                 //painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
                 //Style 2
-                painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
+                //painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
+                //Style 3
+                QImage image;
+                image.load(":/images/red.png");
+                painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
             }
         }
     }

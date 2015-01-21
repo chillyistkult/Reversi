@@ -24,6 +24,8 @@ private slots:
 
     void on_actionPlayer_vs_Computer_triggered();
 
+    void on_actionSettings_triggered();
+
     void on_exit_triggered();
 
 private:

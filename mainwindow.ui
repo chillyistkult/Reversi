@@ -116,7 +116,7 @@ color: rgb(255, 255, 255);</string>
      <addaction name="actionPlayer_vs_Player"/>
     </widget>
     <addaction name="menuNewGame"/>
-    <addaction name="settings"/>
+    <addaction name="actionSettings"/>
     <addaction name="exit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -166,6 +166,11 @@ color: rgb(255, 255, 255);</string>
   <action name="actionPlayer_vs_Player">
    <property name="text">
     <string>Player vs. Player</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>
