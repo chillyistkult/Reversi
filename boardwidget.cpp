@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QtDebug>
+
 #include "minimax.h"
 
 BoardWidget::BoardWidget(QSharedPointer<Board> board, QWidget *parent) :
@@ -41,6 +42,8 @@ QSharedPointer<Board> BoardWidget::getBoard() const
 
 void BoardWidget::paintEvent(QPaintEvent *)
 {
+    int style = 1;
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -50,7 +53,7 @@ void BoardWidget::paintEvent(QPaintEvent *)
         return;
     }
     const QColor bgColor = QColor(0,0,0,255);
-    const QColor boardColor = QColor(245,241,222,255);
+    const QColor boardColor = QColor(255,222,173,255);
     const QColor gridColor = Qt::black;
     const QColor whiteChipColor = QColor(240,240,240,255);;
     const QColor blackChipColor = Qt::black;
@@ -59,16 +62,17 @@ void BoardWidget::paintEvent(QPaintEvent *)
     const int numCells = this->board->getBoardSize();
     const int cellSize = size / numCells;
 
-    if (this->board->getWhoIsNext() == WHITE)
+    if (this->board->getWhoIsNext() == WHITE) {
         painter.fillRect(this->rect(),Qt::white);
-    else
+    }
+    else {
         painter.fillRect(this->rect(),Qt::black);
+    }
 
     painter.scale(1,-1.0);
     painter.translate(0,-1*size);
 
-    painter.translate((this->width() - numCells*cellSize)/2,
-                      -1*(this->height() - numCells*cellSize)/2);
+    painter.translate((this->width() - numCells*cellSize)/2, -1*(this->height() - numCells*cellSize)/2);
 
     painter.fillRect(0,0,numCells*cellSize,numCells*cellSize,boardColor);
 
@@ -95,26 +99,24 @@ void BoardWidget::paintEvent(QPaintEvent *)
             {
                 painter.setPen(whiteChipColor);
                 painter.setBrush(QBrush(whiteChipColor));
-                painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
+                //Style 1
+                //painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
+                //Style 2
+                painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
             }
             else if (cell == BLACK)
             {
                 painter.setPen(blackChipColor);
                 painter.setBrush(QBrush(blackChipColor));
-                painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
+                //Style 1
+                //painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
+                //Style 2
+                painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
             }
         }
     }
 
-    if (this->getBoard()->getWhoIsNext() == WHITE && !this->showPossibleWhite) {
-        return;
-    }
-    else if (this->getBoard()->getWhoIsNext() == BLACK && !this->showPossibleBlack) {
-        return;
-    }
-    else if (this->getBoard()->getWhoIsNext() == EMPTY) {
-        return;
-    }
+
     painter.setPen(Qt::green);
     painter.setBrush(QBrush(whiteChipColor));
     if (this->board->getWhoIsNext() == BLACK) {
@@ -125,8 +127,9 @@ void BoardWidget::paintEvent(QPaintEvent *)
         for (int y = 0; y < numCells; y++)
         {
             BoardPosition pos = {x,y};
-            if (!this->board->isValidMove(pos,this->board->getWhoIsNext()))
+            if (!this->board->isValidMove(pos,this->board->getWhoIsNext())) {
                 continue;
+            }
             painter.drawEllipse(QPoint(cellSize*x + cellSize/2, cellSize*y + cellSize/2),5,5);
         }
     }
@@ -134,12 +137,23 @@ void BoardWidget::paintEvent(QPaintEvent *)
     BoardPosition bestMove = this->getBoard()->getBestMove();
     painter.setBrush(QBrush(Qt::red));
     painter.drawEllipse(QPoint(cellSize*bestMove.x + cellSize/2, cellSize*bestMove.y + cellSize/2),5,5);
+
+    if (this->getBoard()->getWhoIsNext() == WHITE && !this->showPossibleWhite) {
+        return;
+    }
+    else if (this->getBoard()->getWhoIsNext() == BLACK && !this->showPossibleBlack) {
+        return;
+    }
+    else if (this->getBoard()->getWhoIsNext() == EMPTY) {
+        return;
+    }
 }
 
 void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
 {
-    if ((event->pos() - this->lastMousePressPos).manhattanLength() > 4)
+    if ((event->pos() - this->lastMousePressPosition).manhattanLength() > 4) {
         return;
+    }
     QPoint pos = event->pos();
 
     const int size = qMin(this->width(),this->height())-1;
@@ -164,5 +178,5 @@ void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
 
 void BoardWidget::mousePressEvent(QMouseEvent * event)
 {
-    this->lastMousePressPos = event->pos();
+    this->lastMousePressPosition = event->pos();
 }

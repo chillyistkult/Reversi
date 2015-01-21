@@ -35,6 +35,10 @@ QString GameDialog::getPlayerName2() {
     return playerName2;
 }
 
+void GameDialog::enablePlayer2Input() {
+    this->ui->playerName2Edit->setEnabled(true);
+}
+
 void GameDialog::on_buttonBox_accepted()
 {
     playerName1 = this->ui->playerName1Edit->text();

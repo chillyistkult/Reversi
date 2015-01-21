@@ -4,6 +4,7 @@
 #include <QtDebug>
 #include <QtConcurrent/QtConcurrentRun>
 #include <QCoreApplication>
+#include <QSound>
 
 #include "minimax.h"
 
@@ -78,16 +79,6 @@ int Board::getScore() const
     const int edges = this->getwhiteEdgePoints() * edgePoints - this->getblackEdgePoints() * edgePoints;
     const int corners = (cornerPoints*this->getwhiteCornerPoints()) - (cornerPoints*this->getblackCornerPoints());
     const int score = basic + corners + edges;
-
-    /*
-    if ((score > 0 && basic < 0)
-            || (score < 0 && basic > 0))
-    {
-        qDebug() << "Mismatch";
-    }
-    */
-
-    //return score;
     return corners;
 }
 
@@ -343,6 +334,7 @@ bool Board::makeMove(BoardPosition position, CELL_STATE player)
 
     QList<BoardPosition> flips;
     if (!this->isValidMove(position,player,&flips)) {
+        QSound::play(":/sound/doh.wav");
         return false;
     }
 
@@ -358,7 +350,7 @@ bool Board::makeMove(BoardPosition position, CELL_STATE player)
     }
 
 
-    //do the move with flips
+    // the move with flips
     foreach(BoardPosition theirPos, flips)
     {
         this->setCell(theirPos,player);

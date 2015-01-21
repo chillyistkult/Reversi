@@ -27,23 +27,25 @@ void MainWindow::gameOver(CELL_STATE)
 {
     int whiteScore = this->game->getBoard()->getWhiteCount();
     int blackScore = this->game->getBoard()->getBlackPoints();
-    if (whiteScore > blackScore) {
-        if(this->game->getPlayersToken() == WHITE) {
-                QSound::play(":/sound/win.wav");
+    if(this->game->getPlayersToken() == WHITE) {
+        if (whiteScore > blackScore) {
+            QSound::play(":/sound/win.wav");
+            this->ui->statusBar->showMessage(game->getPlayerName1() + " wins with " + QString::number(whiteScore) + " - " + QString::number(blackScore));
         }
-        this->ui->statusBar->showMessage("White wins " + QString::number(whiteScore) + " - " + QString::number(blackScore));
-    }
-    else if (blackScore > whiteScore) {
-        this->ui->statusBar->showMessage("Black wins " + QString::number(blackScore) + " - " + QString::number(whiteScore));
-    }
-    else {
-        this->ui->statusBar->showMessage("Tie! " + QString::number(blackScore) + " - " + QString::number(whiteScore));
+        else if (blackScore > whiteScore) {
+            QSound::play(":/sound/gameover.wav");
+            this->ui->statusBar->showMessage(game->getPlayerName2() + " wins with " + QString::number(blackScore) + " - " + QString::number(whiteScore));
+        }
+        else {
+            this->ui->statusBar->showMessage("Draw! " + QString::number(blackScore) + " - " + QString::number(whiteScore));
+        }
     }
 }
 
 void MainWindow::on_actionPlayer_vs_Player_triggered()
 {
     GameDialog gameDialog(this);
+    gameDialog.enablePlayer2Input();
     gameDialog.exec();
     this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(),gameDialog.getDifficulty(),gameDialog.getPlayerName1(),gameDialog.getPlayerName2())));
 }

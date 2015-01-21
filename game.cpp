@@ -1,4 +1,5 @@
 #include "game.h"
+#include "gamedialog.h"
 
 #include <QTimer>
 #include <QtGlobal>

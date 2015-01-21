@@ -6,8 +6,6 @@
 
 #include "board.h"
 
-
-
 class Game : public QObject
 {
     Q_OBJECT

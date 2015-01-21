@@ -30,7 +30,7 @@ public slots:
 
 private:
     QSharedPointer<Board> board;
-    QPoint lastMousePressPos;
+    QPoint lastMousePressPosition;
 
     bool showPossibleWhite;
     bool showPossibleBlack;

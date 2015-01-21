@@ -32,6 +32,7 @@ public:
     CELL_STATE getToken();
     QString getPlayerName1();
     QString getPlayerName2();
+    void enablePlayer2Input();
 
 private slots:
 
