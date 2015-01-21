@@ -12,27 +12,27 @@ TARGET = MMReversi
 TEMPLATE = app
 
 
-SOURCES += main.cpp \
-    mainwindow.cpp \
-    boardwidget.cpp \
-    game.cpp \
-    board.cpp \
-    minimax.cpp \
-    gamedialog.cpp \
-    settings.cpp
+SOURCES += src/main.cpp \
+    src/mainwindow.cpp \
+    src/boardwidget.cpp \
+    src/game.cpp \
+    src/board.cpp \
+    src/minimax.cpp \
+    src/gamedialog.cpp \
+    src/settings.cpp
 
-HEADERS  += mainwindow.h \
-    boardwidget.h \
-    boardwidget.h \
-    game.h \
-    board.h \
-    minimax.h \
-    gamedialog.h \
-    settings.h
+HEADERS  += src/mainwindow.h \
+    src/boardwidget.h \
+    src/boardwidget.h \
+    src/game.h \
+    src/board.h \
+    src/minimax.h \
+    src/gamedialog.h \
+    src/settings.h
 
-FORMS    += mainwindow.ui \
-    gamedialog.ui \
-    settings.ui
+FORMS    += src/mainwindow.ui \
+    src/gamedialog.ui \
+    src/settings.ui
 
 RESOURCES += \
     resources.qrc

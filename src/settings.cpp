@@ -19,7 +19,7 @@ Settings::~Settings()
 void Settings::writeSettings()
 {
 
-    QSettings settings("test.ini", QSettings::IniFormat);
+    QSettings settings("settings.ini", QSettings::IniFormat);
     settings.beginGroup("Settings");
     settings.setValue("layout", this->ui->boardLayoutBox->currentText());
     settings.setValue("language", this->ui->languageBox->currentText());
@@ -28,7 +28,7 @@ void Settings::writeSettings()
 
 void Settings::readSettings()
 {
-    QSettings settings("test.ini", QSettings::IniFormat);
+    QSettings settings("settings.ini", QSettings::IniFormat);
     settings.beginGroup("Settings");
     this->ui->boardLayoutBox->setCurrentText(settings.value("layout").toString());
     this->ui->languageBox->setCurrentText(settings.value("language").toString());

@@ -42,7 +42,38 @@ QSharedPointer<Board> BoardWidget::getBoard() const
 
 void BoardWidget::paintEvent(QPaintEvent *)
 {
-    int style = 1;
+    int style = 2;
+
+    QColor bgColor;
+    QColor boardColor;
+    QColor gridColor;
+    QColor whiteChipColor;
+    QColor blackChipColor;
+
+
+    switch(style) {
+    case 1:
+        bgColor = QColor(0,0,0,255);
+        boardColor = QColor(222,184,135,255);
+        gridColor = Qt::black;
+        whiteChipColor = QColor(240,240,240,255);;
+        blackChipColor = Qt::black;
+        break;
+    case 2:
+        bgColor = QColor(0,0,0,255);
+        boardColor = QColor(181,227,172,255);
+        gridColor = Qt::black;
+        whiteChipColor = QColor(20,146,255,255);
+        blackChipColor = QColor(255,20,103,255);
+        break;
+    case 3:
+        bgColor = QColor(0,0,0,255);
+        boardColor = QColor(222,184,135,255);
+        gridColor = Qt::black;
+        whiteChipColor = QColor(240,240,240,255);;
+        blackChipColor = Qt::black;
+        break;
+    }
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -52,21 +83,36 @@ void BoardWidget::paintEvent(QPaintEvent *)
         painter.fillRect(this->rect(), QColor(245,241,222,255));
         return;
     }
-    const QColor bgColor = QColor(0,0,0,255);
-    const QColor boardColor = QColor(222,184,135,255);
-    const QColor gridColor = Qt::black;
-    const QColor whiteChipColor = QColor(240,240,240,255);;
-    const QColor blackChipColor = Qt::black;
 
     const int size = qMin(this->width(),this->height())-1;
     const int numCells = this->board->getBoardSize();
     const int cellSize = size / numCells;
 
     if (this->board->getWhoIsNext() == WHITE) {
-        painter.fillRect(this->rect(),Qt::white);
+        switch(style) {
+        case 1:
+            painter.fillRect(this->rect(),Qt::white);
+            break;
+        case 2:
+            painter.fillRect(this->rect(),QColor(20,146,255,255));
+            break;
+        case 3:
+            painter.fillRect(this->rect(),QColor(0,164,49,255));
+            break;
+        }
     }
     else {
-        painter.fillRect(this->rect(),Qt::black);
+        switch(style) {
+        case 1:
+            painter.fillRect(this->rect(),Qt::white);
+            break;
+        case 2:
+            painter.fillRect(this->rect(),QColor(255,20,103,255));
+            break;
+        case 3:
+            painter.fillRect(this->rect(),QColor(199,8,8,255));
+            break;
+        }
     }
 
     painter.scale(1,-1.0);
@@ -99,27 +145,37 @@ void BoardWidget::paintEvent(QPaintEvent *)
             {
                 painter.setPen(whiteChipColor);
                 painter.setBrush(QBrush(whiteChipColor));
-                //Style 1
-                //painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
-                //Style 2
-                //painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
-                //Style 3
-                QImage image;
-                image.load(":/images/green.png");
-                painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
+                switch(style) {
+                case 1:
+                    painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
+                    break;
+                case 2:
+                    painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
+                    break;
+                case 3:
+                    QImage image;
+                    image.load(":/images/green.png");
+                    painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
+                    break;
+                }
             }
             else if (cell == BLACK)
             {
                 painter.setPen(blackChipColor);
                 painter.setBrush(QBrush(blackChipColor));
-                //Style 1
-                //painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
-                //Style 2
-                //painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
-                //Style 3
-                QImage image;
-                image.load(":/images/red.png");
-                painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
+                switch(style) {
+                case 1:
+                    painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
+                    break;
+                case 2:
+                    painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
+                    break;
+                case 3:
+                    QImage image;
+                    image.load(":/images/red.png");
+                    painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
+                    break;
+                }
             }
         }
     }
