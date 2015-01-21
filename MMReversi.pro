@@ -4,35 +4,34 @@
 #
 #-------------------------------------------------
 
-QT       += core gui multimedia
+QT       += core gui multimedia widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4):
 
 TARGET = MMReversi
 TEMPLATE = app
 
 
-SOURCES += src/main.cpp \
-    src/mainwindow.cpp \
-    src/boardwidget.cpp \
-    src/game.cpp \
-    src/board.cpp \
-    src/minimax.cpp \
-    src/gamedialog.cpp \
-    src/settings.cpp
+SOURCES += main.cpp \
+    mainwindow.cpp \
+    boardwidget.cpp \
+    game.cpp \
+    board.cpp \
+    minimax.cpp \
+    gamedialog.cpp \
+    settings.cpp
 
-HEADERS  += src/mainwindow.h \
-    src/boardwidget.h \
-    src/boardwidget.h \
-    src/game.h \
-    src/board.h \
-    src/minimax.h \
-    src/gamedialog.h \
-    src/settings.h
+HEADERS  += mainwindow.h \
+    boardwidget.h \
+    game.h \
+    board.h \
+    minimax.h \
+    gamedialog.h \
+    settings.h
 
-FORMS    += src/mainwindow.ui \
-    src/gamedialog.ui \
-    src/settings.ui
+FORMS    += mainwindow.ui \
+    gamedialog.ui \
+    settings.ui
 
 RESOURCES += \
     resources.qrc
