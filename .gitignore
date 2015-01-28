@@ -1,3 +1,4 @@
 *.autosave
 .qmake.stash
+*.o
 \moc*
