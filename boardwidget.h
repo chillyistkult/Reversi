@@ -16,6 +16,7 @@ public:
     QSharedPointer<Board> getBoard() const;
 
 protected:
+    
     void paintEvent(QPaintEvent *);
 
     void mouseReleaseEvent(QMouseEvent *);

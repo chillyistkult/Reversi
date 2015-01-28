@@ -1,5 +1,6 @@
 #include "game.h"
 #include "gamedialog.h"
+#include "settingsdialog.h"
 
 #include <QTimer>
 #include <QtGlobal>
@@ -7,22 +8,22 @@
 
 
 
-Game::Game(int boardSize, int difficulty, QString playerName1, QString playerName2)
+Game::Game(int boardSize, int difficulty, int style, QString playerName1, QString playerName2)
 {
     this->playerName1 = playerName1;
     this->playerName2 = playerName2;
     this->difficulty = difficulty;
-    this->setBoard(QSharedPointer<Board>(new Board(boardSize)));
+    this->setBoard(QSharedPointer<Board>(new Board(boardSize, style)));
 }
 
 
-Game::Game(CELL_STATE player, int boardSize, int difficulty, QString playerName1) : player(player)
+Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1) : player(player)
 {
     this->playerName1 = playerName1;
     this->playerName2 = "Computer";
     this->player = player;
     this->difficulty = difficulty;
-    this->setBoard(QSharedPointer<Board>(new Board(boardSize)));
+    this->setBoard(QSharedPointer<Board>(new Board(boardSize, style)));
     if (player == WHITE) {
         this->aiPlayer = BLACK;
     }

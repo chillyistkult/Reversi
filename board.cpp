@@ -11,8 +11,8 @@
 const int cornerPoints = 50;
 const int edgePoints = 2;
 
-Board::Board(int size) :
-    QObject(0),boardSize(size), board(0), whiteCount(0), blackPoints(0), boolGameOver(false), whiteCornerPoints(0),
+Board::Board(int size, int style) :
+    QObject(0),boardSize(size), boardStyle(style), board(0), whiteCount(0), blackPoints(0), boolGameOver(false), whiteCornerPoints(0),
     blackCornerPoints(0), whiteEdgePoints(0),blackEdgePoints(0)
 {
     this->initializeBoard();
@@ -31,9 +31,9 @@ Board::Board(const Board & other) :
     this->whiteEdgePoints = other.getwhiteEdgePoints();
     this->blackEdgePoints = other.getblackEdgePoints();
 
-    const int numCells = this->boardSize*this->boardSize;
-    this->board = new CELL_STATE[numCells];
-    memcpy(this->board,other.board,numCells*sizeof(CELL_STATE));
+    const int cells = this->boardSize*this->boardSize;
+    this->board = new CELL_STATE[cells];
+    memcpy(this->board,other.board,cells*sizeof(CELL_STATE));
 }
 
 Board::~Board()
@@ -408,6 +408,11 @@ int Board::getBoardSize() const
     return this->boardSize;
 }
 
+int Board::getBoardStyle()
+{
+    return this->boardStyle;
+}
+
 bool Board::isCellOccupied(BoardPosition position) const
 {
     return (this->getCell(position) != EMPTY);
@@ -461,8 +466,8 @@ void Board::initializeBoard()
         this->board = 0;
     }
 
-    const int numCells = this->boardSize*this->boardSize;
-    this->board = new CELL_STATE[numCells];
+    const int cells = this->boardSize*this->boardSize;
+    this->board = new CELL_STATE[cells];
 
     for (int x = 0; x < this->boardSize; x++)
     {
@@ -474,6 +479,7 @@ void Board::initializeBoard()
     }
 
     int size = this->getBoardSize();
+    int style = this->getBoardStyle();
 
     //Initialize board positions
     const BoardPosition ul = {size/2-1,size/2};

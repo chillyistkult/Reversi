@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "gamedialog.h"
 #include "game.h"
-#include "settings.h"
+#include "SettingsDialog.h"
 
 #include <QtDebug>
 #include <QSound>
@@ -45,22 +45,24 @@ void MainWindow::gameOver(CELL_STATE)
 
 void MainWindow::on_actionPlayer_vs_Player_triggered()
 {
+    SettingsDialog settings(this);
     GameDialog gameDialog(this);
     gameDialog.enablePlayer2Input();
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(),gameDialog.getDifficulty(),gameDialog.getPlayerName1(),gameDialog.getPlayerName2())));
+    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getBoardSize(),gameDialog.getDifficulty(), settings.settings().style,gameDialog.getPlayerName1(),gameDialog.getPlayerName2())));
 }
 
 void MainWindow::on_actionPlayer_vs_Computer_triggered()
 {
+    SettingsDialog settings(this);
     GameDialog gameDialog(this);
     gameDialog.exec();
-    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getToken(),gameDialog.getBoardSize(),gameDialog.getDifficulty(),gameDialog.getPlayerName1())));
+    this->setGame(QSharedPointer<Game>(new Game(gameDialog.getToken(),gameDialog.getBoardSize(),gameDialog.getDifficulty(), settings.settings().style,gameDialog.getPlayerName1())));
 }
 
 void MainWindow::on_actionSettings_triggered()
 {
-    Settings settings(this);
+    SettingsDialog settings(this);
     settings.exec();
 }
 

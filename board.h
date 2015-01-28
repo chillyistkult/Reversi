@@ -23,7 +23,7 @@ class Board : public QObject
 {
     Q_OBJECT
 public:
-    Board(int size=8);
+    Board(int size=8, int style=1);
     Board(const Board&);
     ~Board();
 
@@ -40,6 +40,7 @@ public:
     bool makeMove(BoardPosition pos, CELL_STATE player);
 
     int getBoardSize() const;
+    int getBoardStyle();
 
     bool isCellOccupied(BoardPosition pos) const;
 
@@ -72,6 +73,7 @@ private:
     void setCell(BoardPosition position, CELL_STATE color);
     void incrementCount(CELL_STATE color);
     void decrementCount(CELL_STATE color);
+    int boardStyle;
     int boardSize;
     CELL_STATE * board;
     CELL_STATE whoseNext;

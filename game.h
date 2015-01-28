@@ -10,8 +10,8 @@ class Game : public QObject
 {
     Q_OBJECT
 public:
-    Game(int boardSize, int difficulty, QString playerName1, QString playerName2);
-    Game(CELL_STATE player, int boardSize, int difficulty, QString playerName1);
+    Game(int boardSize, int difficulty, int style, QString playerName1, QString playerName2);
+    Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1);
     virtual ~Game();
 
     QSharedPointer<Board> getBoard() const;

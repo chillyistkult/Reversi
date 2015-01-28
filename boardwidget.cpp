@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QtDebug>
+#include <QMessageBox>
 
 #include "minimax.h"
 
@@ -42,7 +43,21 @@ QSharedPointer<Board> BoardWidget::getBoard() const
 
 void BoardWidget::paintEvent(QPaintEvent *)
 {
-    int style = 2;
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    if (this->board.isNull())
+    {
+        painter.fillRect(this->rect(), QColor(245,241,222,255));
+        QFont font = painter.font();
+        font.setPointSize ( 18 );
+        font.setWeight(QFont::Bold);
+        painter.setFont(font);
+        painter.drawText(this->rect(),"Start a new game.", QTextOption(Qt::AlignCenter));
+        return;
+    }
+
+    int style = this->board->getBoardStyle();
 
     QColor bgColor;
     QColor boardColor;
@@ -52,21 +67,21 @@ void BoardWidget::paintEvent(QPaintEvent *)
 
 
     switch(style) {
-    case 1:
+    case 0:
         bgColor = QColor(0,0,0,255);
         boardColor = QColor(222,184,135,255);
         gridColor = Qt::black;
         whiteChipColor = QColor(240,240,240,255);;
         blackChipColor = Qt::black;
         break;
-    case 2:
+    case 1:
         bgColor = QColor(0,0,0,255);
         boardColor = QColor(181,227,172,255);
         gridColor = Qt::black;
         whiteChipColor = QColor(20,146,255,255);
         blackChipColor = QColor(255,20,103,255);
         break;
-    case 3:
+    case 2:
         bgColor = QColor(0,0,0,255);
         boardColor = QColor(222,184,135,255);
         gridColor = Qt::black;
@@ -75,41 +90,32 @@ void BoardWidget::paintEvent(QPaintEvent *)
         break;
     }
 
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-
-    if (this->board.isNull())
-    {
-        painter.fillRect(this->rect(), QColor(245,241,222,255));
-        return;
-    }
-
     const int size = qMin(this->width(),this->height())-1;
-    const int numCells = this->board->getBoardSize();
-    const int cellSize = size / numCells;
+    const int cells = this->board->getBoardSize();
+    const int cellSize = size / cells;
 
     if (this->board->getWhoIsNext() == WHITE) {
         switch(style) {
-        case 1:
+        case 0:
             painter.fillRect(this->rect(),Qt::white);
             break;
-        case 2:
+        case 1:
             painter.fillRect(this->rect(),QColor(20,146,255,255));
             break;
-        case 3:
+        case 2:
             painter.fillRect(this->rect(),QColor(0,164,49,255));
             break;
         }
     }
     else {
         switch(style) {
-        case 1:
+        case 0:
             painter.fillRect(this->rect(),Qt::white);
             break;
-        case 2:
+        case 1:
             painter.fillRect(this->rect(),QColor(255,20,103,255));
             break;
-        case 3:
+        case 2:
             painter.fillRect(this->rect(),QColor(199,8,8,255));
             break;
         }
@@ -118,25 +124,25 @@ void BoardWidget::paintEvent(QPaintEvent *)
     painter.scale(1,-1.0);
     painter.translate(0,-1*size);
 
-    painter.translate((this->width() - numCells*cellSize)/2, -1*(this->height() - numCells*cellSize)/2);
+    painter.translate((this->width() - cells*cellSize)/2, -1*(this->height() - cells*cellSize)/2);
 
-    painter.fillRect(0,0,numCells*cellSize,numCells*cellSize,boardColor);
+    painter.fillRect(0,0,cells*cellSize,cells*cellSize,boardColor);
 
 
     painter.setPen(gridColor);
-    for (int x = 0; x <= numCells; x++)
+    for (int x = 0; x <= cells; x++)
     {
-        painter.drawLine(x*cellSize,0,x*cellSize,cellSize*numCells);
+        painter.drawLine(x*cellSize,0,x*cellSize,cellSize*cells);
     }
 
-    for (int y = 0; y <= numCells; y++)
+    for (int y = 0; y <= cells; y++)
     {
-        painter.drawLine(0,y*cellSize,cellSize*numCells,y*cellSize);
+        painter.drawLine(0,y*cellSize,cellSize*cells,y*cellSize);
     }
 
-    for (int x = 0; x < numCells; x++)
+    for (int x = 0; x < cells; x++)
     {
-        for (int y = 0; y < numCells; y++)
+        for (int y = 0; y < cells; y++)
         {
             const BoardPosition pos = {x,y};
             CELL_STATE cell = this->board->getCell(pos);
@@ -146,13 +152,13 @@ void BoardWidget::paintEvent(QPaintEvent *)
                 painter.setPen(whiteChipColor);
                 painter.setBrush(QBrush(whiteChipColor));
                 switch(style) {
-                case 1:
+                case 0:
                     painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
                     break;
-                case 2:
+                case 1:
                     painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
                     break;
-                case 3:
+                case 2:
                     QImage image;
                     image.load(":/images/green.png");
                     painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
@@ -164,13 +170,13 @@ void BoardWidget::paintEvent(QPaintEvent *)
                 painter.setPen(blackChipColor);
                 painter.setBrush(QBrush(blackChipColor));
                 switch(style) {
-                case 1:
+                case 0:
                     painter.drawEllipse(QPoint(cellSize*x + cellSize/2,cellSize*y + cellSize/2),cellSize/2-2,cellSize/2-2);
                     break;
-                case 2:
+                case 1:
                     painter.drawRect(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5,cellSize/1.5,cellSize/1.5);
                     break;
-                case 3:
+                case 2:
                     QImage image;
                     image.load(":/images/red.png");
                     painter.drawImage(cellSize*x + cellSize/5.5,cellSize*y + cellSize/5.5, image.scaled(cellSize/1.5, cellSize/1.5).mirrored());
@@ -186,9 +192,9 @@ void BoardWidget::paintEvent(QPaintEvent *)
     if (this->board->getWhoIsNext() == BLACK) {
         painter.setBrush(blackChipColor);
     }
-    for (int x = 0; x < numCells; x++)
+    for (int x = 0; x < cells; x++)
     {
-        for (int y = 0; y < numCells; y++)
+        for (int y = 0; y < cells; y++)
         {
             BoardPosition pos = {x,y};
             if (!this->board->isValidMove(pos,this->board->getWhoIsNext())) {
@@ -215,22 +221,31 @@ void BoardWidget::paintEvent(QPaintEvent *)
 
 void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
 {
+    if (this->board.isNull())
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Please use the main menu to chose game mode.");
+        msgBox.exec();
+        return;
+    }
+
+
     if ((event->pos() - this->lastMousePressPosition).manhattanLength() > 4) {
         return;
     }
     QPoint pos = event->pos();
 
     const int size = qMin(this->width(),this->height())-1;
-    const int numCells = this->board->getBoardSize();
-    const int cellSize = size / numCells;
+    const int cells = this->board->getBoardSize();
+    const int cellSize = size / cells;
     QPoint transformedPos = pos;
     transformedPos.setY(transformedPos.y()*-1);
     transformedPos.setY(transformedPos.y() + size);
-    transformedPos.setX(transformedPos.x() - (this->width() - numCells*cellSize)/2);
-    transformedPos.setY(transformedPos.y() + (this->height() - numCells*cellSize)/2);
+    transformedPos.setX(transformedPos.x() - (this->width() - cells*cellSize)/2);
+    transformedPos.setY(transformedPos.y() + (this->height() - cells*cellSize)/2);
 
 
-    if (transformedPos.x() < 0 || transformedPos.y() < 0 || transformedPos.x() > numCells*cellSize || transformedPos.y() > numCells*cellSize)
+    if (transformedPos.x() < 0 || transformedPos.y() < 0 || transformedPos.x() > cells*cellSize || transformedPos.y() > cells*cellSize)
         return;
 
     int xCell = transformedPos.x() / cellSize;
