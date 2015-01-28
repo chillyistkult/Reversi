@@ -1,8 +1,10 @@
-#include "Minimax.h"
+#include "minimax.h"
 
 #include <QList>
 #include <QCoreApplication>
 #include <QtDebug>
+#include "mainwindow.h"
+#include "logicclass.h"
 
 Minimax::Minimax(QSharedPointer<Board> rootNode,int maxDepth) :
     rootNode(rootNode), maxDepth(maxDepth)
@@ -17,13 +19,15 @@ Minimax::~Minimax()
 
 int Minimax::search()
 {
+    LogicClass l;
+    l.emit50();
     return calculate(this->rootNode,0,-10000,10000);
 }
-
 
 //private
 int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int beta)
 {
+
     //If depth > maxDepth (difficulty) stop here
     if (++depth > this->maxDepth || board->isGameOver()) {
         return board->getScore();

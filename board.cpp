@@ -571,6 +571,7 @@ void Board::setCell(BoardPosition position, CELL_STATE color)
 //private
 void Board::incrementCount(CELL_STATE color)
 {
+    this->updateProgress(33);
     if (color == EMPTY)
         return;
     else if (color == BLACK)

@@ -14,19 +14,16 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void updateProgressBar(int value);
 
 private slots:
     void countChange(int white, int black);
-
     void gameOver(CELL_STATE);
-
     void on_actionPlayer_vs_Player_triggered();
-
     void on_actionPlayer_vs_Computer_triggered();
-
     void on_actionSettings_triggered();
-
     void on_exit_triggered();
+    void on_progressBar_destroyed();
 
 private:
     void setGame(QSharedPointer<Game> game);

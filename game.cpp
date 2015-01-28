@@ -128,6 +128,10 @@ void Game::setBoard(QSharedPointer<Board> nBoard)
             SIGNAL(countChanged(int,int)),
             this,
             SIGNAL(scoreChanged(int,int)));
+    connect(raw,
+            SIGNAL(updateProgress(int)),
+            this,
+            SIGNAL(updateProgress(int)));
 
     this->board = nBoard;
 }

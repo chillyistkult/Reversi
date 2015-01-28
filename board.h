@@ -62,6 +62,7 @@ signals:
     void moveMade(CELL_STATE player, CELL_STATE nextTurn);
     void countChanged(int white, int black);
     void gameOver(CELL_STATE winner);
+    void updateProgress(int value);
 
 
 private:

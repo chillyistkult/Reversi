@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     board.cpp \
     minimax.cpp \
     gamedialog.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    logicclass.cpp
 
 HEADERS  += mainwindow.h \
     boardwidget.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     board.h \
     minimax.h \
     gamedialog.h \
-    settingsdialog.h
+    settingsdialog.h \
+    logicclass.h
 
 FORMS    += mainwindow.ui \
     gamedialog.ui \

@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "gamedialog.h"
 #include "game.h"
-#include "SettingsDialog.h"
+#include "settingsdialog.h"
 
 #include <QtDebug>
 #include <QSound>
@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->progressBar->setValue(0);
 }
 
 MainWindow::~MainWindow()
@@ -79,14 +80,27 @@ void MainWindow::setGame(QSharedPointer<Game> game)
             SIGNAL(gameOver(CELL_STATE)),
             this,
             SLOT(gameOver(CELL_STATE)));
-            this->game = game;
     connect(raw,
             SIGNAL(scoreChanged(int,int)),
             this,
             SLOT(countChange(int,int)));
+    connect(raw,
+            SIGNAL( updateProgress(int) ),
+            this->ui->progressBar,
+            SLOT( setValue(int) ) );
+    this->game = game;
 }
 
 void MainWindow::on_exit_triggered()
 {
     this->close();
+}
+
+void MainWindow::on_progressBar_destroyed()
+{
+
+}
+
+void MainWindow::updateProgressBar(int value) {
+    this->ui->progressBar->setValue(value);
 }
