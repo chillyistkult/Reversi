@@ -44,7 +44,7 @@ private slots:
 
     void on_difficultyBox_currentIndexChanged(int index);
 
-    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_checkBox_clicked(bool checked);
 
 private:
     Ui::GameDialog *ui;

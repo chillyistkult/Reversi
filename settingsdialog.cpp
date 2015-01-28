@@ -1,6 +1,7 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 #include <QSettings>
+#include <QAbstractButton>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -54,4 +55,10 @@ int SettingsDialog::getLanguage() {
 int SettingsDialog::getStyle() {
     QSettings settings("settings.ini", QSettings::IniFormat);
     return settings.value("layout").toInt();
+}
+
+void SettingsDialog::on_buttonBox_clicked(QAbstractButton *button)
+{
+    this->writeSettings();
+    this->close();
 }

@@ -52,8 +52,14 @@
       </item>
       <item>
        <widget class="QProgressBar" name="progressBar">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="value">
          <number>0</number>
+        </property>
+        <property name="invertedAppearance">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -152,6 +158,15 @@ color: rgb(255, 255, 255);</string>
     <addaction name="actionSettings"/>
     <addaction name="exit"/>
    </widget>
+   <widget class="QMenu" name="menuHighscore">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Highscore</string>
+    </property>
+    <addaction name="actionShow"/>
+   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="enabled">
      <bool>false</bool>
@@ -162,12 +177,6 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Help</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menuHighscore">
-    <property name="title">
-     <string>Highscore</string>
-    </property>
-    <addaction name="actionShow"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHighscore"/>
@@ -185,7 +194,7 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionShow">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Show</string>

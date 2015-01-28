@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSettings>
+#include <QAbstractButton>
 
 namespace Ui {
 class SettingsDialog;
@@ -24,6 +25,9 @@ public:
     Settings settings() const;
     int getLanguage();
     int getStyle();
+
+private slots:
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
     void writeSettings();

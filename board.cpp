@@ -451,9 +451,15 @@ BoardPosition Board::getBestMove() const
 
 void Board::calculateBestMove(CELL_STATE player,int difficulty)
 {
+
     QSharedPointer<Board> board(new Board(*this));
     Minimax minimax(board, difficulty);
+    connect(&minimax,
+            SIGNAL(updateProgress(int)),
+            this,
+            SIGNAL(updateProgress(int)));
     minimax.search();
+    this->updateProgress(0);
     this->bestMove = minimax.getBestMove();
 }
 
@@ -503,7 +509,7 @@ void Board::initializeBoard()
     this->boolGameOver = false;
 
     this->boardChanged();
-    this->countChanged(this->getWhiteCount(),this->getBlackPoints());
+    this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
     //this->calculateBestMove(this->getWhoIsNext());
 }
 
@@ -571,14 +577,13 @@ void Board::setCell(BoardPosition position, CELL_STATE color)
 //private
 void Board::incrementCount(CELL_STATE color)
 {
-    this->updateProgress(33);
     if (color == EMPTY)
         return;
     else if (color == BLACK)
         this->blackPoints++;
     else
         this->whiteCount++;
-    this->countChanged(this->getWhiteCount(),this->getBlackPoints());
+    this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
 }
 
 //private
@@ -594,7 +599,7 @@ void Board::decrementCount(CELL_STATE color)
     else {
         this->whiteCount--;
     }
-    this->countChanged(this->getWhiteCount(),this->getBlackPoints());
+    this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
 }
 
 

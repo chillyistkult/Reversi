@@ -30,7 +30,7 @@ public slots:
 
 private slots:
     virtual void handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
-    virtual void _gameOver(CELL_STATE winner);
+    virtual void handleGameOver(CELL_STATE winner);
     virtual void handleScoreChanged(int white, int black);
     virtual void makeAIMove();
 

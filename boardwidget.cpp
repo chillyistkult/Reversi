@@ -65,28 +65,24 @@ void BoardWidget::paintEvent(QPaintEvent *)
     QColor whiteChipColor;
     QColor blackChipColor;
 
+    gridColor = Qt::black;
+    bgColor = QColor(0,0,0,255);
 
     switch(style) {
     case 0:
-        bgColor = QColor(0,0,0,255);
         boardColor = QColor(222,184,135,255);
-        gridColor = Qt::black;
         whiteChipColor = QColor(240,240,240,255);;
         blackChipColor = Qt::black;
         break;
     case 1:
-        bgColor = QColor(0,0,0,255);
         boardColor = QColor(181,227,172,255);
-        gridColor = Qt::black;
         whiteChipColor = QColor(20,146,255,255);
         blackChipColor = QColor(255,20,103,255);
         break;
     case 2:
-        bgColor = QColor(0,0,0,255);
         boardColor = QColor(222,184,135,255);
-        gridColor = Qt::black;
         whiteChipColor = QColor(240,240,240,255);;
-        blackChipColor = Qt::black;
+        blackChipColor = QColor(203,8,8,255);
         break;
     }
 
@@ -250,9 +246,9 @@ void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
 
     int xCell = transformedPos.x() / cellSize;
     int yCell = transformedPos.y() / cellSize;
-    const BoardPosition BoardPosition = {xCell,yCell};
+    const BoardPosition boardPosition = {xCell,yCell};
 
-    this->cellClicked(BoardPosition);
+    this->cellClicked(boardPosition);
 }
 
 void BoardWidget::mousePressEvent(QMouseEvent * event)

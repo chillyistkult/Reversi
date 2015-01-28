@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>268</width>
-    <height>282</height>
+    <height>255</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,49 +23,14 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <layout class="QFormLayout" name="formLayout">
-          <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="checkBox">
             <property name="text">
-             <string>Player 1:</string>
+             <string/>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="playerName1Edit">
-            <property name="text">
-             <string>White</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Token:      </string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QComboBox" name="comboBox">
-            <item>
-             <property name="text">
-              <string>White</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Black</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:6pt; font-style:italic;&quot;&gt;Note: Black starts.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -79,13 +44,34 @@
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="playerName1Edit">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Player 1:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBox_2">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="1">
            <widget class="QLineEdit" name="playerName2Edit">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Black</string>
+             <string/>
             </property>
            </widget>
           </item>

@@ -17,19 +17,17 @@ SOURCES += main.cpp \
     boardwidget.cpp \
     game.cpp \
     board.cpp \
-    minimax.cpp \
     gamedialog.cpp \
     settingsdialog.cpp \
-    logicclass.cpp
+    minimax.cpp
 
 HEADERS  += mainwindow.h \
     boardwidget.h \
     game.h \
     board.h \
-    minimax.h \
     gamedialog.h \
     settingsdialog.h \
-    logicclass.h
+    minimax.h
 
 FORMS    += mainwindow.ui \
     gamedialog.ui \

@@ -45,11 +45,6 @@ void GameDialog::on_buttonBox_accepted()
     playerName2 = this->ui->playerName2Edit->text();
 }
 
-void GameDialog::on_buttonBox_rejected()
-{
-
-}
-
 void GameDialog::on_boardSizeSlider_valueChanged(int value)
 {
     this->ui->boardSizeValueLabel->setText(QString::number(this->ui->boardSizeSlider->value()));
@@ -76,12 +71,7 @@ void GameDialog::on_difficultyBox_currentIndexChanged(int index)
     }
 }
 
-void GameDialog::on_comboBox_currentIndexChanged(const QString &arg1)
+void GameDialog::on_checkBox_clicked(bool checked)
 {
-    if(arg1 == "White") {
-        settings.token = WHITE;
-    }
-    else if (arg1 == "Black") {
-        settings.token = BLACK;
-    }
+
 }

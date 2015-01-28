@@ -1,10 +1,12 @@
-#include "board.h"
+#ifndef MINIMAX_H
+#define MINIMAX_H
 
-#include <QSharedPointer>
-#include <QtGlobal>
+#include <QObject>
+#include <board.h>
 
-class Minimax
+class Minimax : public QObject
 {
+    Q_OBJECT
 public:
     Minimax(QSharedPointer<Board> rootNode,int maxDepth);
     virtual ~Minimax();
@@ -13,10 +15,13 @@ public:
 
     BoardPosition getBestMove() const;
 
+signals:
+    void updateProgress(int value);
+
 private:
-    int calculate(QSharedPointer<Board> board, int depth, int alpha, int beta);
+    int calculate(QSharedPointer<Board> board, int depth, int alpha, int beta, int level);
     QSharedPointer<Board> rootNode;
     const int maxDepth;
     BoardPosition bestMove;
 };
-
+#endif // MINIMAX_H

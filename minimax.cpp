@@ -3,11 +3,9 @@
 #include <QList>
 #include <QCoreApplication>
 #include <QtDebug>
-#include "mainwindow.h"
-#include "logicclass.h"
 
 Minimax::Minimax(QSharedPointer<Board> rootNode,int maxDepth) :
-    rootNode(rootNode), maxDepth(maxDepth)
+        rootNode(rootNode), maxDepth(maxDepth)
 {
     BoardPosition bestMove = {0,0};
     this->bestMove = bestMove;
@@ -15,20 +13,20 @@ Minimax::Minimax(QSharedPointer<Board> rootNode,int maxDepth) :
 
 Minimax::~Minimax()
 {
+
 }
 
 int Minimax::search()
 {
-    LogicClass l;
-    l.emit50();
-    return calculate(this->rootNode,0,-10000,10000);
+    return calculate(this->rootNode,0,-10000,10000, 0);
 }
 
 //private
-int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int beta)
+int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int beta, int level=1)
 {
 
-    //If depth > maxDepth (difficulty) stop here
+    //this->updateProgress((100/this->maxDepth)/level);
+
     if (++depth > this->maxDepth || board->isGameOver()) {
         return board->getScore();
     }
@@ -42,7 +40,7 @@ int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int be
         QSharedPointer<Board> simBoard(new Board(*board));
         simBoard->makeMove(move,whoseNext);
 
-        int score = this->calculate(simBoard,depth,alpha,beta);
+        int score = this->calculate(simBoard,depth,alpha,beta,level++);
 
         if (whoseNext == WHITE)
         {
@@ -51,11 +49,13 @@ int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int be
                 alpha = score;
                 bestMove = move;
             }
-            else if (score == alpha && qrand() % 2)
+            else if (score == alpha && qrand() % 2) {
                 bestMove = move;
+            }
 
-            if (beta <= alpha)
+            if (beta <= alpha) {
                 break;
+            }
         }
         else if (whoseNext == BLACK)
         {
@@ -64,13 +64,14 @@ int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int be
                 beta = score;
                 bestMove = move;
             }
-            else if (score == beta && qrand() % 2)
+            else if (score == beta && qrand() % 2) {
                 bestMove = move;
+            }
 
-            if (beta <= alpha)
+            if (beta <= alpha) {
                 break;
+            }
         }
-
     }
 
     if (depth == 1) {

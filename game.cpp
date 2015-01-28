@@ -74,7 +74,7 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
     }
 }
 
-void Game::_gameOver(CELL_STATE winner)
+void Game::handleGameOver(CELL_STATE winner)
 {
     //this->gameOver(winner);
 }
@@ -115,17 +115,17 @@ void Game::setBoard(QSharedPointer<Board> nBoard)
     connect(raw,
             SIGNAL(gameOver(CELL_STATE)),
             this,
-            SLOT(_gameOver(CELL_STATE)));
+            SLOT(handleGameOver(CELL_STATE)));
     connect(raw,
             SIGNAL(gameOver(CELL_STATE)),
             this,
             SIGNAL(gameOver(CELL_STATE)));
     connect(raw,
-            SIGNAL(countChanged(int,int)),
+            SIGNAL(scoreChanged(int,int)),
             this,
             SLOT(handleScoreChanged(int,int)));
     connect(raw,
-            SIGNAL(countChanged(int,int)),
+            SIGNAL(scoreChanged(int,int)),
             this,
             SIGNAL(scoreChanged(int,int)));
     connect(raw,
