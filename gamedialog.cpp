@@ -24,7 +24,12 @@ int GameDialog::getBoardSize() {
 }
 
 CELL_STATE GameDialog::getToken() {
-    return settings.token;
+    if(this->ui->player1CheckBox->checkState()) {
+        return BLACK;
+    }
+    else {
+        return WHITE;
+    }
 }
 
 QString GameDialog::getPlayerName1() {
@@ -71,7 +76,22 @@ void GameDialog::on_difficultyBox_currentIndexChanged(int index)
     }
 }
 
-void GameDialog::on_checkBox_clicked(bool checked)
+void GameDialog::on_player1CheckBox_clicked(bool checked)
 {
+    if(!checked && !this->ui->player1CheckBox->checkState()) {
+        this->ui->player2CheckBox->setChecked(true);
+    }
+    else {
+        this->ui->player2CheckBox->setChecked(false);
+    }
+}
 
+void GameDialog::on_player2CheckBox_clicked(bool checked)
+{
+    if(!checked && !this->ui->player2CheckBox->checkState()) {
+        this->ui->player1CheckBox->setChecked(true);
+    }
+    else {
+        this->ui->player1CheckBox->setChecked(false);
+    }
 }

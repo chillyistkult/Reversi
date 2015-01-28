@@ -13,7 +13,6 @@ struct Settings
 {
     int difficulty = 1;
     int boardSize = 8;
-    CELL_STATE token = WHITE;
 };
 
 class GameDialog;
@@ -38,13 +37,13 @@ private slots:
 
     void on_buttonBox_accepted();
 
-    void on_buttonBox_rejected();
-
     void on_boardSizeSlider_valueChanged(int value);
 
     void on_difficultyBox_currentIndexChanged(int index);
 
-    void on_checkBox_clicked(bool checked);
+    void on_player1CheckBox_clicked(bool checked);
+
+    void on_player2CheckBox_clicked(bool checked);
 
 private:
     Ui::GameDialog *ui;

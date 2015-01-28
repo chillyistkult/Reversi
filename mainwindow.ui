@@ -29,6 +29,9 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QCheckBox" name="soundBox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Sound</string>
         </property>

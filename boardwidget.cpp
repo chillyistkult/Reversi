@@ -106,7 +106,7 @@ void BoardWidget::paintEvent(QPaintEvent *)
     else {
         switch(style) {
         case 0:
-            painter.fillRect(this->rect(),Qt::white);
+            painter.fillRect(this->rect(),Qt::black);
             break;
         case 1:
             painter.fillRect(this->rect(),QColor(255,20,103,255));

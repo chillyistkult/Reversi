@@ -10,8 +10,18 @@
 
 Game::Game(int boardSize, int difficulty, int style, QString playerName1, QString playerName2)
 {
-    this->playerName1 = playerName1;
-    this->playerName2 = playerName2;
+    if(playerName1.isEmpty()) {
+        this->playerName1 = "Bob";
+    }
+    else {
+        this->playerName1 = playerName1;
+    }
+    if(playerName2.isEmpty()) {
+        this->playerName2 = "Carl";
+    }
+    else {
+        this->playerName2 = playerName2;
+    }
     this->difficulty = difficulty;
     this->setBoard(QSharedPointer<Board>(new Board(boardSize, style)));
 }
@@ -19,7 +29,12 @@ Game::Game(int boardSize, int difficulty, int style, QString playerName1, QStrin
 
 Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1) : player(player)
 {
-    this->playerName1 = playerName1;
+    if(playerName1.isEmpty()) {
+        this->playerName1 = "Human";
+    }
+    else {
+        this->playerName1 = playerName1;
+    }
     this->playerName2 = "Computer";
     this->player = player;
     this->difficulty = difficulty;
