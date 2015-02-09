@@ -3,6 +3,7 @@
 #include "gamedialog.h"
 #include "game.h"
 #include "settingsdialog.h"
+#include "highscore.h"
 
 #include <QtDebug>
 #include <QSound>
@@ -15,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->progressBar->setValue(0);
+    QAction *highscoreAction = ui->menuBar->addAction("Highscore");
+    connect(highscoreAction, SIGNAL(triggered()), this, SLOT(on_highscore_triggered()));
 
 }
 
@@ -86,6 +89,13 @@ void MainWindow::on_actionSettings_triggered()
 {
     SettingsDialog settings(this);
     settings.exec();
+}
+
+//Click on settings
+void MainWindow::on_highscore_triggered()
+{
+    Highscore highscore(this);
+    highscore.exec();
 }
 
 //Initialize slots and signal for new game

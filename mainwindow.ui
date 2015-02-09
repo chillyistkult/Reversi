@@ -164,46 +164,11 @@ color: rgb(255, 255, 255);</string>
     <addaction name="actionSettings"/>
     <addaction name="exit"/>
    </widget>
-   <widget class="QMenu" name="menuHighscore">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="title">
-     <string>Highscore</string>
-    </property>
-    <addaction name="actionShow"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="title">
-     <string>Help</string>
-    </property>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuHighscore"/>
-   <addaction name="menuHelp"/>
   </widget>
   <action name="exit">
    <property name="text">
     <string>Exit</string>
-   </property>
-  </action>
-  <action name="settings">
-   <property name="text">
-    <string>Settings</string>
-   </property>
-  </action>
-  <action name="actionShow">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show</string>
    </property>
   </action>
   <action name="actionPlayer_vs_Computer">
@@ -219,16 +184,6 @@ color: rgb(255, 255, 255);</string>
   <action name="actionSettings">
    <property name="text">
     <string>Settings</string>
-   </property>
-  </action>
-  <action name="actionEnglish">
-   <property name="text">
-    <string>English</string>
-   </property>
-  </action>
-  <action name="actionGerman">
-   <property name="text">
-    <string>German</string>
    </property>
   </action>
  </widget>

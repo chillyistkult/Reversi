@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+#include <QSqlDatabase>
+#include <QSqlTableModel>
+
 namespace Ui {
 class Highscore;
 }
@@ -17,6 +20,9 @@ public:
 
 private:
     Ui::Highscore *ui;
+
+    QSqlQueryModel *model;
+    QSqlDatabase db;
 };
 
 #endif // HIGHSCORE_H
