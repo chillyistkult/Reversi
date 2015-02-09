@@ -11,6 +11,7 @@
 const int cornerPoints = 50;
 const int edgePoints = 2;
 
+//Constructor
 Board::Board(int size, int style) :
     QObject(0),boardSize(size), boardStyle(style), board(0), whiteCount(0), blackPoints(0), boolGameOver(false), whiteCornerPoints(0),
     blackCornerPoints(0), whiteEdgePoints(0),blackEdgePoints(0)
@@ -18,6 +19,7 @@ Board::Board(int size, int style) :
     this->initializeBoard();
 }
 
+//Constructor with old board
 Board::Board(const Board & other) :
     QObject(0)
 {
@@ -36,6 +38,7 @@ Board::Board(const Board & other) :
     memcpy(this->board,other.board,cells*sizeof(CELL_STATE));
 }
 
+//Destructor
 Board::~Board()
 {
     if (this->board != 0) {
@@ -73,6 +76,7 @@ int Board::getblackEdgePoints() const
     return this->blackEdgePoints;
 }
 
+//Calculates overall score
 int Board::getScore() const
 {
     const int basic = this->getWhiteCount() - this->getBlackPoints();
@@ -82,6 +86,7 @@ int Board::getScore() const
     return corners;
 }
 
+//Get valid moves by player
 QList<BoardPosition> Board::getValidMoves(CELL_STATE player) const
 {
     QList<BoardPosition> validMoves;
@@ -97,6 +102,7 @@ QList<BoardPosition> Board::getValidMoves(CELL_STATE player) const
     return validMoves;
 }
 
+//Is move allowed?
 bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPosition> * flips) const
 {
     Q_UNUSED(flips);
@@ -111,7 +117,7 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
 
     bool valid = false;
 
-    //Check moving left
+    //Check move left
     {
         bool gotEnemy = false;
         for (int x = position.x-1; x >= 0; x--)
@@ -136,9 +142,9 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
                 break;
             }
         }
-    } //End left-moving check
+    }
 
-    //Check moving right
+    //Check move right
     {
         bool gotEnemy = false;
         for (int x = position.x+1; x < this->getBoardSize(); x++)
@@ -160,9 +166,9 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
                 break;
             }
         }
-    } //End right-moving check
+    }
 
-    //Check moving up
+    //Check move up
     {
         bool gotEnemy = false;
         for (int y = position.y+1; y < this->getBoardSize(); y++)
@@ -184,9 +190,9 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
                 break;
             }
         }
-    }//End up-moving check
+    }
 
-    //Check moving down
+    //Check move down
     {
         bool gotEnemy = false;
         for (int y = position.y-1; y >= 0; y--)
@@ -208,7 +214,7 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
                 break;
             }
         }
-    }//End up-moving check
+    }
 
     //Diagonal up-right check
     {
@@ -236,7 +242,7 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
             ++x;
             ++y;
         }
-    } //End diagonal up-right check
+    }
 
     //Diagonal up-left check
     {
@@ -264,7 +270,7 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
             --x;
             ++y;
         }
-    }//End diagonal up-left check
+    }
 
     //Diagonal down-right check
     {
@@ -292,7 +298,7 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
             ++x;
             --y;
         }
-    }//End diagonal down-right check
+    }
 
     //Diagonal down-left check
     {
@@ -320,11 +326,11 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
             --x;
             --y;
         }
-    }//End diagonal down-left check
-
+    }
     return valid;
 }
 
+//Does a move by player at a specific position
 bool Board::makeMove(BoardPosition position, CELL_STATE player)
 {
     if (player != this->getWhoIsNext())
@@ -433,6 +439,7 @@ bool Board::isGameOver() const
     return this->boolGameOver;
 }
 
+//Who won?
 CELL_STATE Board::getWinningColor() const
 {
     if (this->getWhiteCount() > this->getBlackPoints())
@@ -444,11 +451,13 @@ CELL_STATE Board::getWinningColor() const
 
 }
 
+//Getter for bestMove
 BoardPosition Board::getBestMove() const
 {
     return this->bestMove;
 }
 
+//Uses minimax algorithm to calculate best move
 void Board::calculateBestMove(CELL_STATE player,int difficulty)
 {
 
@@ -463,7 +472,7 @@ void Board::calculateBestMove(CELL_STATE player,int difficulty)
     this->bestMove = minimax.getBestMove();
 }
 
-//private
+//Initialize board
 void Board::initializeBoard()
 {
     if (this->board != 0)
@@ -601,5 +610,3 @@ void Board::decrementCount(CELL_STATE color)
     }
     this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
 }
-
-

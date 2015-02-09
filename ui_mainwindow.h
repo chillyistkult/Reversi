@@ -51,8 +51,8 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuNewGame;
-    QMenu *menuHelp;
     QMenu *menuHighscore;
+    QMenu *menuHelp;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -65,7 +65,7 @@ public:
         settings->setObjectName(QStringLiteral("settings"));
         actionShow = new QAction(MainWindow);
         actionShow->setObjectName(QStringLiteral("actionShow"));
-        actionShow->setEnabled(false);
+        actionShow->setEnabled(true);
         actionPlayer_vs_Computer = new QAction(MainWindow);
         actionPlayer_vs_Computer->setObjectName(QStringLiteral("actionPlayer_vs_Computer"));
         actionPlayer_vs_Player = new QAction(MainWindow);
@@ -89,20 +89,23 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         soundBox = new QCheckBox(centralWidget);
         soundBox->setObjectName(QStringLiteral("soundBox"));
+        soundBox->setEnabled(false);
 
         horizontalLayout->addWidget(soundBox);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_2);
 
         progressBar = new QProgressBar(centralWidget);
         progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setValue(24);
+        progressBar->setEnabled(true);
+        progressBar->setValue(0);
+        progressBar->setInvertedAppearance(true);
 
         horizontalLayout->addWidget(progressBar);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
@@ -128,7 +131,7 @@ public:
         MainWindow->setStatusBar(statusBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 700, 22));
+        menuBar->setGeometry(QRect(0, 0, 700, 19));
         QFont font;
         font.setFamily(QStringLiteral("MS Shell Dlg 2"));
         font.setPointSize(8);
@@ -146,12 +149,13 @@ public:
         font1.setBold(false);
         font1.setWeight(50);
         menuNewGame->setFont(font1);
+        menuHighscore = new QMenu(menuBar);
+        menuHighscore->setObjectName(QStringLiteral("menuHighscore"));
+        menuHighscore->setEnabled(false);
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuHelp->setEnabled(false);
         menuHelp->setAutoFillBackground(false);
-        menuHighscore = new QMenu(menuBar);
-        menuHighscore->setObjectName(QStringLiteral("menuHighscore"));
         MainWindow->setMenuBar(menuBar);
 
         menuBar->addAction(menuFile->menuAction());
@@ -185,8 +189,8 @@ public:
 #endif // QT_NO_WHATSTHIS
         menuFile->setTitle(QApplication::translate("MainWindow", "Game", 0));
         menuNewGame->setTitle(QApplication::translate("MainWindow", "New", 0));
-        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0));
         menuHighscore->setTitle(QApplication::translate("MainWindow", "Highscore", 0));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0));
     } // retranslateUi
 
 };

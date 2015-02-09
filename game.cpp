@@ -7,7 +7,7 @@
 #include <QtDebug>
 
 
-
+//Constructor Player vs. Player
 Game::Game(int boardSize, int difficulty, int style, QString playerName1, QString playerName2)
 {
     if(playerName1.isEmpty()) {
@@ -26,11 +26,11 @@ Game::Game(int boardSize, int difficulty, int style, QString playerName1, QStrin
     this->setBoard(QSharedPointer<Board>(new Board(boardSize, style)));
 }
 
-
+//Constructor Player vs. Computer
 Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1) : player(player)
 {
     if(playerName1.isEmpty()) {
-        this->playerName1 = "Human";
+        this->playerName1 = tr("Human");
     }
     else {
         this->playerName1 = playerName1;
@@ -48,38 +48,42 @@ Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString 
     this->handleTurnTaken(WHITE,this->getBoard()->getWhoIsNext());
 }
 
+//Destructor
 Game::~Game()
 {
 
 }
 
+//Gets actual reference to board
 QSharedPointer<Board> Game::getBoard() const
 {
     return this->board;
 }
 
+//Get players token
 CELL_STATE Game::getPlayersToken() {
     return this->player;
 }
 
+//Get player name
 QString Game::getPlayerName1() {
     return this->playerName1;
 }
 
+//Get player name
 QString Game::getPlayerName2() {
     return this->playerName2;
 }
 
-
+//Cell clicked slot
 void Game::handleCellClicked(BoardPosition where)
 {
     this->board->makeMove(where, this->board->getWhoIsNext());
 }
 
+//Handle turn taken
 void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
 {
-    qDebug() << this->getBoard()->getScore();
-    Q_UNUSED(byWhom);
     if (this->getBoard()->isGameOver()) {
         return;
     }
@@ -89,17 +93,19 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
     }
 }
 
+//Game over slot
 void Game::handleGameOver(CELL_STATE winner)
 {
     //this->gameOver(winner);
 }
 
+//Score changed slot
 void Game::handleScoreChanged(int white, int black)
 {
     //this->scoreChanged(white,black);
 }
 
-//private slot
+//Make AI turn
 void Game::makeAIMove()
 {
     if (this->aiPlayer == BLACK) {
@@ -111,7 +117,7 @@ void Game::makeAIMove()
     this->getBoard()->makeMove(this->getBoard()->getBestMove(),this->aiPlayer);
 }
 
-//private
+//Initialize new board and connect signals / slots
 void Game::setBoard(QSharedPointer<Board> nBoard)
 {
     if (nBoard.isNull()) {
@@ -150,6 +156,3 @@ void Game::setBoard(QSharedPointer<Board> nBoard)
 
     this->board = nBoard;
 }
-
-
-

@@ -4,11 +4,11 @@
         <file alias="gameover.wav">resources/gameover.wav</file>
         <file alias="doh.wav">resources/doh.wav</file>
     </qresource>
-    <qresource prefix="/">
-        <file>highscore.qml</file>
-    </qresource>
     <qresource prefix="/images">
         <file alias="red.png">resources/red.png</file>
         <file alias="green.png">resources/green.png</file>
+    </qresource>
+    <qresource prefix="/languages">
+        <file>reversi_de.qm</file>
     </qresource>
 </RCC>

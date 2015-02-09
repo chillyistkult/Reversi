@@ -53,7 +53,7 @@ void BoardWidget::paintEvent(QPaintEvent *)
         font.setPointSize ( 18 );
         font.setWeight(QFont::Bold);
         painter.setFont(font);
-        painter.drawText(this->rect(),"Start a new game.", QTextOption(Qt::AlignCenter));
+        painter.drawText(this->rect(),tr("Start a new game."), QTextOption(Qt::AlignCenter));
         return;
     }
 
@@ -215,12 +215,13 @@ void BoardWidget::paintEvent(QPaintEvent *)
     }
 }
 
+//Get boardPosition
 void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
 {
     if (this->board.isNull())
     {
         QMessageBox msgBox;
-        msgBox.setText("Please use the main menu to chose game mode.");
+        msgBox.setText(tr("Please use the main menu to chose game mode."));
         msgBox.exec();
         return;
     }

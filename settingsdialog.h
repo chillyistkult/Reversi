@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QSettings>
 #include <QAbstractButton>
+#include <QTransLator>
 
 namespace Ui {
 class SettingsDialog;
@@ -28,12 +29,17 @@ public:
 
 private slots:
     void on_buttonBox_clicked(QAbstractButton *button);
+    void on_languageBox_currentIndexChanged(int index);
+
+protected:
+    void changeEvent(QEvent *e);
 
 private:
     void writeSettings();
     void readSettings();
     void applySettings();
     Settings currentSettings;
+    QTranslator translator;
     Ui::SettingsDialog *ui;
 };
 

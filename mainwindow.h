@@ -1,4 +1,5 @@
 #include <QMainWindow>
+#include <QTranslator>
 
 #include "board.h"
 #include "game.h"
@@ -24,6 +25,9 @@ private slots:
     void on_actionSettings_triggered();
     void on_exit_triggered();
     void on_progressBar_destroyed();
+
+protected:
+    void changeEvent(QEvent *e);
 
 private:
     void setGame(QSharedPointer<Game> game);

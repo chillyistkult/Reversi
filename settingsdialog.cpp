@@ -42,23 +42,52 @@ void SettingsDialog::readSettings()
     settings.endGroup();
 }
 
-void SettingsDialog::applySettings() {
+void SettingsDialog::applySettings()
+{
     this->ui->boardLayoutBox->setCurrentIndex(currentSettings.style);
     this->ui->languageBox->setCurrentIndex(currentSettings.language);
 }
 
-int SettingsDialog::getLanguage() {
+int SettingsDialog::getLanguage()
+{
     QSettings settings("settings.ini", QSettings::IniFormat);
     return settings.value("language").toInt();
 }
 
-int SettingsDialog::getStyle() {
+int SettingsDialog::getStyle()
+{
     QSettings settings("settings.ini", QSettings::IniFormat);
     return settings.value("layout").toInt();
 }
 
 void SettingsDialog::on_buttonBox_clicked(QAbstractButton *button)
 {
-    this->writeSettings();
     this->close();
+}
+
+void SettingsDialog::on_languageBox_currentIndexChanged(int index)
+{
+    currentSettings.language = index;
+
+    // remove the old translator
+    switch (index) {
+    case 0:
+        if(translator.load("reversi_de", ":/languages")) {
+             QCoreApplication::instance()->installTranslator(&translator);
+        }
+        break;
+    case 1:
+            QCoreApplication::instance()->removeTranslator(&translator);
+        break;
+    default:
+        break;
+    }
+}
+
+void SettingsDialog::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
 }
