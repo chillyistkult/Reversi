@@ -5,6 +5,9 @@
 #include <QTimer>
 #include <QtGlobal>
 #include <QtDebug>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
 
 
 //Constructor Player vs. Player
@@ -29,6 +32,8 @@ Game::Game(int boardSize, int difficulty, int style, QString playerName1, QStrin
 //Constructor Player vs. Computer
 Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1) : player(player)
 {
+
+    this->saveHighscore(20, 46);
     if(playerName1.isEmpty()) {
         this->playerName1 = tr("Human");
     }
@@ -96,6 +101,7 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
 //Game over slot
 void Game::handleGameOver(CELL_STATE winner)
 {
+    this->saveHighscore(20, 46);
     //this->gameOver(winner);
 }
 
@@ -115,6 +121,28 @@ void Game::makeAIMove()
             this->getBoard()->calculateBestMove(this->aiPlayer, difficulty);
     }
     this->getBoard()->makeMove(this->getBoard()->getBestMove(),this->aiPlayer);
+}
+
+void Game::saveHighscore(int white, int black)
+{
+    QSqlDatabase db;
+    db =  QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName( "./highscore.db" );
+    if (db.open()) {
+        QSqlQuery query(db);
+        if (!query.exec("CREATE TABLE IF NOT EXISTS score (id INTEGER UNIQUE PRIMARY KEY, player1 VARCHAR(30), player2 VARCHAR(30), score VARCHAR(30))")) {
+            qDebug() << query.lastError();
+        }
+        query.prepare("INSERT INTO score (player1, player2, score) "
+                      "VALUES (:player1, :player2, :score)");
+        query.bindValue(":player1", "Human");
+        query.bindValue(":player2", "Computer");
+        query.bindValue(":score", "20:56");
+        if( !query.exec() ) {
+            qDebug() << query.lastError();
+        }
+    }
+    db.close();
 }
 
 //Initialize new board and connect signals / slots

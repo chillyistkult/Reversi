@@ -23,16 +23,17 @@ signals:
     void updateProgress(int value);
 
 public slots:
-    virtual void handleCellClicked(BoardPosition where);
-    virtual QString getPlayerName1();
-    virtual QString getPlayerName2();
-    virtual CELL_STATE getPlayersToken();
+    void handleCellClicked(BoardPosition where);
+    QString getPlayerName1();
+    QString getPlayerName2();
+    CELL_STATE getPlayersToken();
 
 private slots:
-    virtual void handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
-    virtual void handleGameOver(CELL_STATE winner);
-    virtual void handleScoreChanged(int white, int black);
-    virtual void makeAIMove();
+    void handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
+    void handleGameOver(CELL_STATE winner);
+    void handleScoreChanged(int white, int black);
+    void makeAIMove();
+    void saveHighscore(int white, int black);
 
 protected:
     void setBoard(QSharedPointer<Board> nBoard);

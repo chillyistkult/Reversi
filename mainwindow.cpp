@@ -38,19 +38,18 @@ void MainWindow::gameOver(CELL_STATE)
 {
     int whiteScore = this->game->getBoard()->getWhiteCount();
     int blackScore = this->game->getBoard()->getBlackPoints();
-    if(this->game->getPlayersToken() == WHITE) {
-        if (whiteScore > blackScore) {
-            QSound::play(":/sound/win.wav");
-            this->ui->statusBar->showMessage(game->getPlayerName1() + tr(" wins with ") + QString::number(whiteScore) + " - " + QString::number(blackScore));
-        }
-        else if (blackScore > whiteScore) {
-            QSound::play(":/sound/gameover.wav");
-            this->ui->statusBar->showMessage(game->getPlayerName2() + tr(" wins with ") + QString::number(blackScore) + " - " + QString::number(whiteScore));
-        }
-        else {
-            this->ui->statusBar->showMessage("Draw! " + QString::number(blackScore) + " - " + QString::number(whiteScore));
-        }
+    if (whiteScore > blackScore) {
+        QSound::play(":/sound/win.wav");
+        this->ui->statusBar->showMessage(game->getPlayerName1() + tr(" wins with ") + QString::number(whiteScore) + " - " + QString::number(blackScore));
     }
+    else if (blackScore > whiteScore) {
+        QSound::play(":/sound/gameover.wav");
+        this->ui->statusBar->showMessage(game->getPlayerName2() + tr(" wins with ") + QString::number(blackScore) + " - " + QString::number(whiteScore));
+    }
+    else {
+        this->ui->statusBar->showMessage("Draw! " + QString::number(blackScore) + " - " + QString::number(whiteScore));
+    }
+
 }
 
 //Click on Player vs. Player menue point

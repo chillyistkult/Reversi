@@ -19,6 +19,7 @@ public:
     ~Highscore();
 
 private:
+    void load();
     Ui::Highscore *ui;
 
     QSqlQueryModel *model;
