@@ -9,18 +9,17 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-
 //Constructor Player vs. Player
 Game::Game(int boardSize, int difficulty, int style, QString playerName1, QString playerName2)
 {
     if(playerName1.isEmpty()) {
-        this->playerName1 = "Bob";
+        this->playerName1 = "Human1";
     }
     else {
         this->playerName1 = playerName1;
     }
     if(playerName2.isEmpty()) {
-        this->playerName2 = "Carl";
+        this->playerName2 = "Human2";
     }
     else {
         this->playerName2 = playerName2;

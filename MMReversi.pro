@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets sql
+QT       += core gui multimedia widgets sql testlib
 
 greaterThan(QT_MAJOR_VERSION, 4):
 
@@ -19,7 +19,10 @@ SOURCES += main.cpp \
     gamedialog.cpp \
     settingsdialog.cpp \
     minimax.cpp \
-    highscore.cpp
+    highscore.cpp \
+    test/test1.cpp \
+    test/test2.cpp \
+    test/gametest.cpp
 
 TRANSLATIONS = reversi_de.ts
 
@@ -30,7 +33,11 @@ HEADERS  += mainwindow.h \
     gamedialog.h \
     settingsdialog.h \
     minimax.h \
-    highscore.h
+    highscore.h \
+    AutoTest.h \
+    test/test1.h \
+    test/test2.h \
+    test/gametest.h
 
 FORMS    += mainwindow.ui \
     gamedialog.ui \

@@ -68,20 +68,20 @@ void SettingsDialog::on_buttonBox_clicked(QAbstractButton *button)
 void SettingsDialog::on_languageBox_currentIndexChanged(int index)
 {
     currentSettings.language = index;
-
-    // remove the old translator
+    qDebug("Language changed!");
+    /*
     switch (index) {
     case 0:
         if(translator.load("reversi_de", ":/languages")) {
-             QCoreApplication::instance()->installTranslator(&translator);
+            qDebug("Translator loaded");
+            QCoreApplication::instance()->installTranslator(&translator);
         }
         break;
     case 1:
             QCoreApplication::instance()->removeTranslator(&translator);
         break;
-    default:
-        break;
     }
+    */
 }
 
 void SettingsDialog::changeEvent(QEvent* event)

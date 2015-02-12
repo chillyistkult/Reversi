@@ -12,13 +12,13 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.9 -Wall -W -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.9 -Wall -W -fPIE $(DEFINES)
-INCPATH       = -I../../../../Qt/5.3/clang_64/mkspecs/macx-clang -I. -I../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -F/Users/benjaminschuch/Qt/5.3/clang_64/lib
+INCPATH       = -I../../../../Qt/5.3/clang_64/mkspecs/macx-clang -I. -I../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtNetwork.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -F/Users/benjaminschuch/Qt/5.3/clang_64/lib
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.9
-LIBS          = $(SUBLIBS) -F/Users/benjaminschuch/Qt/5.3/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework QtSql -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/benjaminschuch/Qt/5.3/clang_64/lib -framework QtMultimedia -framework QtGui -framework QtCore -framework QtNetwork -framework QtWidgets -framework QtSql -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 QMAKE         = /Users/benjaminschuch/Qt/5.3/clang_64/bin/qmake
@@ -366,9 +366,11 @@ Makefile: MMReversi.pro ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.con
 		../../../../Qt/5.3/clang_64/mkspecs/features/lex.prf \
 		MMReversi.pro \
 		resources.qrc \
-		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
+		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/QtMultimedia.prl \
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/QtGui.prl \
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/QtCore.prl \
+		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
+		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/QtSql.prl
 	$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile MMReversi.pro
 ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.prf:
@@ -489,9 +491,11 @@ Makefile: MMReversi.pro ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.con
 ../../../../Qt/5.3/clang_64/mkspecs/features/lex.prf:
 MMReversi.pro:
 resources.qrc:
-/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
+/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/QtMultimedia.prl:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/QtGui.prl:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/QtCore.prl:
+/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/QtNetwork.prl:
+/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/QtSql.prl:
 qmake: FORCE
 	@$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile MMReversi.pro
@@ -565,7 +569,7 @@ moc_mainwindow.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		game.h \
 		mainwindow.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
 
 moc_boardwidget.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
@@ -579,7 +583,7 @@ moc_boardwidget.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Version
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		boardwidget.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib boardwidget.h -o moc_boardwidget.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib boardwidget.h -o moc_boardwidget.cpp
 
 moc_game.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
@@ -591,7 +595,7 @@ moc_game.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Header
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
 		game.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib game.h -o moc_game.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib game.h -o moc_game.cpp
 
 moc_board.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QtGlobal \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qglobal.h \
@@ -602,7 +606,7 @@ moc_board.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Heade
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		board.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib board.h -o moc_board.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib board.h -o moc_board.cpp
 
 moc_gamedialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QDialog \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qdialog.h \
@@ -618,7 +622,7 @@ moc_gamedialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		gamedialog.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib gamedialog.h -o moc_gamedialog.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib gamedialog.h -o moc_gamedialog.cpp
 
 moc_settingsdialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QDialog \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qdialog.h \
@@ -629,7 +633,7 @@ moc_settingsdialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Vers
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTransLator \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtranslator.h \
 		settingsdialog.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib settingsdialog.h -o moc_settingsdialog.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib settingsdialog.h -o moc_settingsdialog.cpp
 
 moc_minimax.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
@@ -641,7 +645,7 @@ moc_minimax.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Hea
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
 		minimax.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib minimax.h -o moc_minimax.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib minimax.h -o moc_minimax.cpp
 
 moc_highscore.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QDialog \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qdialog.h \
@@ -650,7 +654,7 @@ moc_highscore.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/
 		../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers/QSqlTableModel \
 		../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers/qsqltablemodel.h \
 		highscore.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib highscore.h -o moc_highscore.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib highscore.h -o moc_highscore.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -754,7 +758,9 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers/QSqlTableModel \
 		../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers/qsqltablemodel.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QtDebug \
-		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdebug.h
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdebug.h \
+		../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers/QSound \
+		../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers/qsound.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 boardwidget.o: boardwidget.cpp boardwidget.h \
@@ -827,6 +833,8 @@ board.o: board.cpp board.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdebug.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QCoreApplication \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qcoreapplication.h \
+		../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers/QSound \
+		../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers/qsound.h \
 		minimax.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o board.o board.cpp
 
