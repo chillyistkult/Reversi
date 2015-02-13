@@ -26,7 +26,7 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "BoardWidget.h"
+#include "boardwidget.h"
 
 QT_BEGIN_NAMESPACE
 

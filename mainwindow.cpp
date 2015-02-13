@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->progressBar->setValue(0);
+
     QAction *highscoreAction = ui->menuBar->addAction("Highscore");
     connect(highscoreAction, SIGNAL(triggered()), this, SLOT(on_highscore_triggered()));
 
@@ -140,6 +141,7 @@ void MainWindow::updateProgressBar(int value) {
 
 void MainWindow::changeEvent(QEvent* event)
 {
+    qDebug() << "ChangeEvent";
     if (event->type() == QEvent::LanguageChange)
     {
         qDebug("Retranslate UI");

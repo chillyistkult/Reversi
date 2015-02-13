@@ -2,6 +2,7 @@
 #include "ui_settingsdialog.h"
 #include <QSettings>
 #include <QAbstractButton>
+#include <QDebug>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -69,9 +70,10 @@ void SettingsDialog::on_languageBox_currentIndexChanged(int index)
 {
     currentSettings.language = index;
     qDebug("Language changed!");
-    /*
+    qDebug() << index;
     switch (index) {
     case 0:
+
         if(translator.load("reversi_de", ":/languages")) {
             qDebug("Translator loaded");
             QCoreApplication::instance()->installTranslator(&translator);
@@ -81,13 +83,13 @@ void SettingsDialog::on_languageBox_currentIndexChanged(int index)
             QCoreApplication::instance()->removeTranslator(&translator);
         break;
     }
-    */
+
 }
 
 void SettingsDialog::changeEvent(QEvent* event)
 {
     if (event->type() == QEvent::LanguageChange)
     {
-        ui->retranslateUi(this);
+        //ui->retranslateUi(this);
     }
 }

@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QSettings>
 #include <QAbstractButton>
-#include <QTransLator>
+#include <QTranslator>
 
 namespace Ui {
 class SettingsDialog;

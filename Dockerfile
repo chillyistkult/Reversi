@@ -67,6 +67,8 @@ RUN git clone https://github.com/mxe/mxe.git
 
 # Build cross environment
 RUN cd mxe && make qtbase
+RUN cd mxe && make qtmultimedia
+
 
 # TODO: Cleanup all unneeded stuff to make a slim image
 

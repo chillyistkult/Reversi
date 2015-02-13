@@ -12,13 +12,13 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_TESTLIB_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi\"
 CFLAGS        = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.9 -Wall -W -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -O2 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.9 -Wall -W -fPIE $(DEFINES)
-INCPATH       = -I../../../../Qt/5.3/clang_64/mkspecs/macx-clang -I. -I../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtNetwork.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -F/Users/benjaminschuch/Qt/5.3/clang_64/lib
+INCPATH       = -I../../../../Qt/5.3/clang_64/mkspecs/macx-clang -I. -I../../../../Qt/5.3/clang_64/lib/QtMultimedia.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtNetwork.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers -I../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -F/Users/benjaminschuch/Qt/5.3/clang_64/lib
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.9
-LIBS          = $(SUBLIBS) -F/Users/benjaminschuch/Qt/5.3/clang_64/lib -framework QtMultimedia -framework QtGui -framework QtCore -framework QtNetwork -framework QtWidgets -framework QtSql -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/benjaminschuch/Qt/5.3/clang_64/lib -framework QtMultimedia -framework QtGui -framework QtCore -framework QtNetwork -framework QtWidgets -framework QtTest -framework Security -framework ApplicationServices -framework IOKit -framework QtSql -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 QMAKE         = /Users/benjaminschuch/Qt/5.3/clang_64/bin/qmake
@@ -53,7 +53,10 @@ SOURCES       = main.cpp \
 		gamedialog.cpp \
 		settingsdialog.cpp \
 		minimax.cpp \
-		highscore.cpp qrc_resources.cpp \
+		highscore.cpp \
+		test/test1.cpp \
+		test/test2.cpp \
+		test/gametest.cpp qrc_resources.cpp \
 		moc_mainwindow.cpp \
 		moc_boardwidget.cpp \
 		moc_game.cpp \
@@ -61,7 +64,10 @@ SOURCES       = main.cpp \
 		moc_gamedialog.cpp \
 		moc_settingsdialog.cpp \
 		moc_minimax.cpp \
-		moc_highscore.cpp
+		moc_highscore.cpp \
+		moc_test1.cpp \
+		moc_test2.cpp \
+		moc_gametest.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		boardwidget.o \
@@ -71,6 +77,9 @@ OBJECTS       = main.o \
 		settingsdialog.o \
 		minimax.o \
 		highscore.o \
+		test1.o \
+		test2.o \
+		gametest.o \
 		qrc_resources.o \
 		moc_mainwindow.o \
 		moc_boardwidget.o \
@@ -79,7 +88,10 @@ OBJECTS       = main.o \
 		moc_gamedialog.o \
 		moc_settingsdialog.o \
 		moc_minimax.o \
-		moc_highscore.o
+		moc_highscore.o \
+		moc_test1.o \
+		moc_test2.o \
+		moc_gametest.o
 DIST          = ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/qdevice.pri \
 		../../../../Qt/5.3/clang_64/mkspecs/features/device_config.prf \
@@ -189,6 +201,7 @@ DIST          = ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/resources.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/moc.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/unix/opengl.prf \
+		../../../../Qt/5.3/clang_64/mkspecs/features/testlib_defines.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/uic.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/unix/thread.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/mac/rez.prf \
@@ -204,7 +217,10 @@ DIST          = ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		gamedialog.cpp \
 		settingsdialog.cpp \
 		minimax.cpp \
-		highscore.cpp
+		highscore.cpp \
+		test/test1.cpp \
+		test/test2.cpp \
+		test/gametest.cpp
 QMAKE_TARGET  = MMReversi
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = MMReversi.app/Contents/MacOS/MMReversi
@@ -357,6 +373,7 @@ Makefile: MMReversi.pro ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.con
 		../../../../Qt/5.3/clang_64/mkspecs/features/resources.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/moc.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/unix/opengl.prf \
+		../../../../Qt/5.3/clang_64/mkspecs/features/testlib_defines.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/uic.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/unix/thread.prf \
 		../../../../Qt/5.3/clang_64/mkspecs/features/mac/rez.prf \
@@ -371,6 +388,7 @@ Makefile: MMReversi.pro ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.con
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/QtCore.prl \
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/QtNetwork.prl \
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
+		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/QtTest.prl \
 		/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/QtSql.prl
 	$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile MMReversi.pro
 ../../../../Qt/5.3/clang_64/mkspecs/features/spec_pre.prf:
@@ -482,6 +500,7 @@ Makefile: MMReversi.pro ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/qmake.con
 ../../../../Qt/5.3/clang_64/mkspecs/features/resources.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/moc.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/unix/opengl.prf:
+../../../../Qt/5.3/clang_64/mkspecs/features/testlib_defines.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/uic.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/unix/thread.prf:
 ../../../../Qt/5.3/clang_64/mkspecs/features/mac/rez.prf:
@@ -496,6 +515,7 @@ resources.qrc:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/QtCore.prl:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/QtNetwork.prl:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
+/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/QtTest.prl:
 /Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/QtSql.prl:
 qmake: FORCE
 	@$(QMAKE) -spec macx-clang CONFIG+=x86_64 -o Makefile MMReversi.pro
@@ -516,7 +536,7 @@ MMReversi.app/Contents/Info.plist:
 	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,@TYPEINFO@,????,g" -e "s,@ICON@,,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.MMReversi,g" -e "s,@EXECUTABLE@,MMReversi,g" -e "s,@TYPEINFO@,????,g" ../../../../Qt/5.3/clang_64/mkspecs/macx-clang/Info.plist.app >MMReversi.app/Contents/Info.plist
 dist: 
 	@test -d .tmp/MMReversi1.0.0 || mkdir -p .tmp/MMReversi1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents resources.qrc .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents mainwindow.h boardwidget.h game.h board.h gamedialog.h settingsdialog.h minimax.h highscore.h .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp boardwidget.cpp game.cpp board.cpp gamedialog.cpp settingsdialog.cpp minimax.cpp highscore.cpp .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents mainwindow.ui gamedialog.ui settingsdialog.ui highscore.ui .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents reversi_de.ts .tmp/MMReversi1.0.0/ && (cd `dirname .tmp/MMReversi1.0.0` && $(TAR) MMReversi1.0.0.tar MMReversi1.0.0 && $(COMPRESS) MMReversi1.0.0.tar) && $(MOVE) `dirname .tmp/MMReversi1.0.0`/MMReversi1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/MMReversi1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents resources.qrc .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents mainwindow.h boardwidget.h game.h board.h gamedialog.h settingsdialog.h minimax.h highscore.h AutoTest.h test/test1.h test/test2.h test/gametest.h .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents main.cpp mainwindow.cpp boardwidget.cpp game.cpp board.cpp gamedialog.cpp settingsdialog.cpp minimax.cpp highscore.cpp test/test1.cpp test/test2.cpp test/gametest.cpp .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents mainwindow.ui gamedialog.ui settingsdialog.ui highscore.ui .tmp/MMReversi1.0.0/ && $(COPY_FILE) --parents reversi_de.ts .tmp/MMReversi1.0.0/ && (cd `dirname .tmp/MMReversi1.0.0` && $(TAR) MMReversi1.0.0.tar MMReversi1.0.0 && $(COMPRESS) MMReversi1.0.0.tar) && $(MOVE) `dirname .tmp/MMReversi1.0.0`/MMReversi1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/MMReversi1.0.0
 
 
 clean:compiler_clean 
@@ -551,9 +571,9 @@ qrc_resources.cpp: resources.qrc \
 		resources/doh.wav
 	/Users/benjaminschuch/Qt/5.3/clang_64/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_boardwidget.cpp moc_game.cpp moc_board.cpp moc_gamedialog.cpp moc_settingsdialog.cpp moc_minimax.cpp moc_highscore.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_boardwidget.cpp moc_game.cpp moc_board.cpp moc_gamedialog.cpp moc_settingsdialog.cpp moc_minimax.cpp moc_highscore.cpp moc_test1.cpp moc_test2.cpp moc_gametest.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_boardwidget.cpp moc_game.cpp moc_board.cpp moc_gamedialog.cpp moc_settingsdialog.cpp moc_minimax.cpp moc_highscore.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_boardwidget.cpp moc_game.cpp moc_board.cpp moc_gamedialog.cpp moc_settingsdialog.cpp moc_minimax.cpp moc_highscore.cpp moc_test1.cpp moc_test2.cpp moc_gametest.cpp
 moc_mainwindow.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTranslator \
@@ -569,7 +589,7 @@ moc_mainwindow.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		game.h \
 		mainwindow.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib mainwindow.h -o moc_mainwindow.cpp
 
 moc_boardwidget.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
@@ -583,7 +603,7 @@ moc_boardwidget.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Version
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		boardwidget.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib boardwidget.h -o moc_boardwidget.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib boardwidget.h -o moc_boardwidget.cpp
 
 moc_game.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
@@ -595,7 +615,7 @@ moc_game.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Header
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
 		game.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib game.h -o moc_game.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib game.h -o moc_game.cpp
 
 moc_board.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QtGlobal \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qglobal.h \
@@ -606,7 +626,7 @@ moc_board.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Heade
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		board.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib board.h -o moc_board.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib board.h -o moc_board.cpp
 
 moc_gamedialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QDialog \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qdialog.h \
@@ -622,7 +642,7 @@ moc_gamedialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		gamedialog.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib gamedialog.h -o moc_gamedialog.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib gamedialog.h -o moc_gamedialog.cpp
 
 moc_settingsdialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QDialog \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qdialog.h \
@@ -633,7 +653,7 @@ moc_settingsdialog.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Vers
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTransLator \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtranslator.h \
 		settingsdialog.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib settingsdialog.h -o moc_settingsdialog.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib settingsdialog.h -o moc_settingsdialog.cpp
 
 moc_minimax.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
@@ -645,7 +665,7 @@ moc_minimax.cpp: ../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Hea
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
 		minimax.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib minimax.h -o moc_minimax.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib minimax.h -o moc_minimax.cpp
 
 moc_highscore.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QDialog \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qdialog.h \
@@ -654,7 +674,49 @@ moc_highscore.cpp: ../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/
 		../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers/QSqlTableModel \
 		../../../../Qt/5.3/clang_64/lib/QtSql.framework/Versions/5/Headers/qsqltablemodel.h \
 		highscore.h
-	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib highscore.h -o moc_highscore.cpp
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib highscore.h -o moc_highscore.cpp
+
+moc_test1.cpp: AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
+		test/test1.h
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib test/test1.h -o moc_test1.cpp
+
+moc_test2.cpp: AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
+		test/test2.h
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib test/test2.h -o moc_test2.cpp
+
+moc_gametest.cpp: AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
+		game.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
+		board.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QtGlobal \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qglobal.h \
+		test/gametest.h
+	/Users/benjaminschuch/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/benjaminschuch/Qt/5.3/clang_64/mkspecs/macx-clang -I/Users/benjaminschuch/Dropbox/Projekte/Qt/MMReversi -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtMultimedia.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtTest.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtSql.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtNetwork.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/benjaminschuch/Qt/5.3/clang_64/lib/QtCore.framework/Headers -F/Users/benjaminschuch/Qt/5.3/clang_64/lib test/gametest.h -o moc_gametest.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -712,12 +774,13 @@ main.o: main.cpp mainwindow.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
 		game.h \
+		AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QApplication \
 		../../../../Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qapplication.h \
-		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QLibraryInfo \
-		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlibraryinfo.h \
-		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QDebug \
-		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdebug.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSettings \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
@@ -901,6 +964,50 @@ highscore.o: highscore.cpp highscore.h \
 		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o highscore.o highscore.cpp
 
+test1.o: test/test1.cpp test/test1.h \
+		AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test1.o test/test1.cpp
+
+test2.o: test/test2.cpp test/test2.h \
+		AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o test2.o test/test2.cpp
+
+gametest.o: test/gametest.cpp test/gametest.h \
+		AutoTest.h \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/QTest \
+		../../../../Qt/5.3/clang_64/lib/QtTest.framework/Versions/5/Headers/qtest.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QList \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qlist.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QString \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qstring.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QSharedPointer \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qsharedpointer.h \
+		game.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QObject \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qobject.h \
+		board.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QtGlobal \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qglobal.h \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QDebug \
+		../../../../Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gametest.o test/gametest.cpp
+
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
@@ -927,6 +1034,15 @@ moc_minimax.o: moc_minimax.cpp
 
 moc_highscore.o: moc_highscore.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_highscore.o moc_highscore.cpp
+
+moc_test1.o: moc_test1.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_test1.o moc_test1.cpp
+
+moc_test2.o: moc_test2.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_test2.o moc_test2.cpp
+
+moc_gametest.o: moc_gametest.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gametest.o moc_gametest.cpp
 
 ####### Install
 
