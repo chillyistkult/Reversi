@@ -16,10 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->progressBar->setValue(0);
-
-    QAction *highscoreAction = ui->menuBar->addAction("Highscore");
-    connect(highscoreAction, SIGNAL(triggered()), this, SLOT(on_highscore_triggered()));
-
 }
 
 //Destructor
@@ -35,9 +31,9 @@ void MainWindow::countChange(int white, int black)
 }
 
 //Game over event signal
-void MainWindow::gameOver(CELL_STATE)
+void MainWindow::gameOver(CELL_STATE, int white, int black)
 {
-    int whiteScore = this->game->getBoard()->getWhiteCount();
+    int whiteScore = this->game->getBoard()->getWhitePoints();
     int blackScore = this->game->getBoard()->getBlackPoints();
     if (whiteScore > blackScore) {
         QSound::play(":/sound/win.wav");
@@ -92,7 +88,7 @@ void MainWindow::on_actionSettings_triggered()
 }
 
 //Click on settings
-void MainWindow::on_highscore_triggered()
+void MainWindow::on_actionHighscore_triggered()
 {
     Highscore highscore(this);
     highscore.exec();
@@ -109,9 +105,9 @@ void MainWindow::setGame(QSharedPointer<Game> game)
             raw,
             SLOT(handleCellClicked(BoardPosition)));
     connect(raw,
-            SIGNAL(gameOver(CELL_STATE)),
+            SIGNAL(gameOver(CELL_STATE,int,int)),
             this,
-            SLOT(gameOver(CELL_STATE)));
+            SLOT(gameOver(CELL_STATE,int,int)));
     connect(raw,
             SIGNAL(scoreChanged(int,int)),
             this,
@@ -141,12 +137,9 @@ void MainWindow::updateProgressBar(int value) {
 
 void MainWindow::changeEvent(QEvent* event)
 {
-    qDebug() << "ChangeEvent";
     if (event->type() == QEvent::LanguageChange)
     {
-        qDebug("Retranslate UI");
         ui->retranslateUi(this);
     }
-
     QMainWindow::changeEvent(event);
 }

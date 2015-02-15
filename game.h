@@ -19,7 +19,7 @@ public:
 signals:
     void turnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
     void scoreChanged(int white, int black);
-    void gameOver(CELL_STATE winner);
+    void gameOver(CELL_STATE winner, int white, int black);
     void updateProgress(int value);
 
 public slots:
@@ -30,7 +30,7 @@ public slots:
 
 private slots:
     void handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
-    void handleGameOver(CELL_STATE winner);
+    void handleGameOver(CELL_STATE winner, int white, int black);
     void handleScoreChanged(int white, int black);
     void makeAIMove();
     void saveHighscore(int white, int black);

@@ -31,8 +31,6 @@ Game::Game(int boardSize, int difficulty, int style, QString playerName1, QStrin
 //Constructor Player vs. Computer
 Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1) : player(player)
 {
-
-    this->saveHighscore(20, 46);
     if(playerName1.isEmpty()) {
         this->playerName1 = tr("Human");
     }
@@ -55,7 +53,10 @@ Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString 
 //Destructor
 Game::~Game()
 {
-
+    QStringList list = QSqlDatabase::connectionNames();
+    for(int i = 0; i < list.count(); ++i) {
+        QSqlDatabase::removeDatabase(list[i]);
+    }
 }
 
 //Gets actual reference to board
@@ -98,9 +99,9 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
 }
 
 //Game over slot
-void Game::handleGameOver(CELL_STATE winner)
+void Game::handleGameOver(CELL_STATE winner, int white, int black)
 {
-    this->saveHighscore(20, 46);
+    this->saveHighscore(white, black);
     //this->gameOver(winner);
 }
 
@@ -124,19 +125,19 @@ void Game::makeAIMove()
 
 void Game::saveHighscore(int white, int black)
 {
-    QSqlDatabase db;
-    db =  QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "Highscore");
     db.setDatabaseName( "./highscore.db" );
     if (db.open()) {
         QSqlQuery query(db);
-        if (!query.exec("CREATE TABLE IF NOT EXISTS score (id INTEGER UNIQUE PRIMARY KEY, player1 VARCHAR(30), player2 VARCHAR(30), score VARCHAR(30))")) {
+        if (!query.exec("CREATE TABLE IF NOT EXISTS score (id INTEGER UNIQUE PRIMARY KEY, player1 VARCHAR(30), player2 VARCHAR(30), score1 INTEGER, score2 INTEGER)")) {
             qDebug() << query.lastError();
         }
-        query.prepare("INSERT INTO score (player1, player2, score) "
-                      "VALUES (:player1, :player2, :score)");
-        query.bindValue(":player1", "Human");
-        query.bindValue(":player2", "Computer");
-        query.bindValue(":score", "20:56");
+        query.prepare("INSERT INTO score (player1, player2, score1, score2) "
+                      "VALUES (:player1, :player2, :score1, :score2)");
+        query.bindValue(":player1", this->getPlayerName1());
+        query.bindValue(":player2", this->getPlayerName2());
+        query.bindValue(":score1", white);
+        query.bindValue(":score2", black);
         if( !query.exec() ) {
             qDebug() << query.lastError();
         }
@@ -161,13 +162,13 @@ void Game::setBoard(QSharedPointer<Board> nBoard)
             this,
             SIGNAL(turnTaken(CELL_STATE,CELL_STATE)));
     connect(raw,
-            SIGNAL(gameOver(CELL_STATE)),
+            SIGNAL(gameOver(CELL_STATE,int,int)),
             this,
-            SLOT(handleGameOver(CELL_STATE)));
+            SLOT(handleGameOver(CELL_STATE,int,int)));
     connect(raw,
-            SIGNAL(gameOver(CELL_STATE)),
+            SIGNAL(gameOver(CELL_STATE,int,int)),
             this,
-            SIGNAL(gameOver(CELL_STATE)));
+            SIGNAL(gameOver(CELL_STATE,int,int)));
     connect(raw,
             SIGNAL(scoreChanged(int,int)),
             this,

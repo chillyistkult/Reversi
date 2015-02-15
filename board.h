@@ -27,7 +27,7 @@ public:
     Board(const Board&);
     ~Board();
 
-    int getWhiteCount() const;
+    int getWhitePoints() const;
     int getBlackPoints() const;
     int getwhiteCornerPoints() const;
     int getblackCornerPoints() const;
@@ -61,7 +61,7 @@ signals:
     void boardChanged();
     void moveMade(CELL_STATE player, CELL_STATE nextTurn);
     void scoreChanged(int white, int black);
-    void gameOver(CELL_STATE winner);
+    void gameOver(CELL_STATE winner,int white, int black);
     void updateProgress(int value);
 
 
@@ -92,7 +92,7 @@ private:
 
 inline int qHash(const Board & b)
 {
-    return (b.getWhiteCount()*1000 - b.getBlackPoints()*10)*(b.getWhiteCount() + b.getBlackPoints());
+    return (b.getWhitePoints()*1000 - b.getBlackPoints()*10)*(b.getWhitePoints() + b.getBlackPoints());
 }
 
 inline bool operator==(const Board & b1, const Board & b2)
@@ -103,7 +103,7 @@ inline bool operator==(const Board & b1, const Board & b2)
     else if (b1.getWhoIsNext() != b2.getWhoIsNext()) {
         return false;
     }
-    else if (b1.getWhiteCount() != b2.getWhiteCount()) {
+    else if (b1.getWhitePoints() != b2.getWhitePoints()) {
         return false;
     }
     else if (b1.getBlackPoints() != b2.getBlackPoints()) {

@@ -19,13 +19,13 @@ public:
 
 private slots:
     void countChange(int white, int black);
-    void gameOver(CELL_STATE);
+    void gameOver(CELL_STATE,int white, int black);
     void on_actionPlayer_vs_Player_triggered();
     void on_actionPlayer_vs_Computer_triggered();
     void on_actionSettings_triggered();
     void on_exit_triggered();
     void on_progressBar_destroyed();
-    void on_highscore_triggered();
+    void on_actionHighscore_triggered();
 
 protected:
     void changeEvent(QEvent *e);

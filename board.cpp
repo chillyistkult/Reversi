@@ -25,7 +25,7 @@ Board::Board(const Board & other) :
 {
     this->boardSize = other.getBoardSize();
     this->whoseNext = other.getWhoIsNext();
-    this->whiteCount = other.getWhiteCount();
+    this->whiteCount = other.getWhitePoints();
     this->blackPoints = other.getBlackPoints();
     this->boolGameOver = other.isGameOver();
     this->whiteCornerPoints = other.getwhiteCornerPoints();
@@ -46,7 +46,7 @@ Board::~Board()
     }
 }
 
-int Board::getWhiteCount() const
+int Board::getWhitePoints() const
 {
     return this->whiteCount;
 }
@@ -79,7 +79,7 @@ int Board::getblackEdgePoints() const
 //Calculates overall score
 int Board::getScore() const
 {
-    const int basic = this->getWhiteCount() - this->getBlackPoints();
+    const int basic = this->getWhitePoints() - this->getBlackPoints();
     const int edges = this->getwhiteEdgePoints() * edgePoints - this->getblackEdgePoints() * edgePoints;
     const int corners = (cornerPoints*this->getwhiteCornerPoints()) - (cornerPoints*this->getblackCornerPoints());
     const int score = basic + corners + edges;
@@ -374,7 +374,7 @@ bool Board::makeMove(BoardPosition position, CELL_STATE player)
         {
             this->whoseNext = EMPTY;
             this->boolGameOver = true;
-            this->gameOver(this->getWinningColor());
+            this->gameOver(this->getWinningColor(), this->getWhitePoints(), this->getBlackPoints());
         }
     }
 
@@ -442,9 +442,9 @@ bool Board::isGameOver() const
 //Who won?
 CELL_STATE Board::getWinningColor() const
 {
-    if (this->getWhiteCount() > this->getBlackPoints())
+    if (this->getWhitePoints() > this->getBlackPoints())
         return BLACK;
-    else if (this->getWhiteCount() < this->getBlackPoints())
+    else if (this->getWhitePoints() < this->getBlackPoints())
         return WHITE;
     else
         return EMPTY;
@@ -518,7 +518,7 @@ void Board::initializeBoard()
     this->boolGameOver = false;
 
     this->boardChanged();
-    this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
+    this->scoreChanged(this->getWhitePoints(),this->getBlackPoints());
     //this->calculateBestMove(this->getWhoIsNext());
 }
 
@@ -592,7 +592,7 @@ void Board::incrementCount(CELL_STATE color)
         this->blackPoints++;
     else
         this->whiteCount++;
-    this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
+    this->scoreChanged(this->getWhitePoints(),this->getBlackPoints());
 }
 
 //private
@@ -608,5 +608,5 @@ void Board::decrementCount(CELL_STATE color)
     else {
         this->whiteCount--;
     }
-    this->scoreChanged(this->getWhiteCount(),this->getBlackPoints());
+    this->scoreChanged(this->getWhitePoints(),this->getBlackPoints());
 }

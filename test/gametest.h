@@ -3,6 +3,7 @@
 
 #include "AutoTest.h"
 #include "game.h"
+#include "board.h"
 
 class GameTest : public QObject
 {
@@ -10,13 +11,20 @@ class GameTest : public QObject
 
 private slots:
     void initTestCase();
-    void getPlayersToken();
-    void getPlayerName1();
-    void getPlayerName2();
+    void testGetBoard();
+    void testGetPlayersToken();
+    void testGetPlayerName1();
+    void testGetPlayerName2();
+    void testBestMoveCalculation();
+    void testGetPoints();
+    void testIsValidMove();
+    void testGetCell();
+    void testGetWhoIsNext();
     void cleanupTestCase();
 
 private:
     Game * game;
+    Board * board;
 };
 
 DECLARE_TEST(GameTest)

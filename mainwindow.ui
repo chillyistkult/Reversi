@@ -161,6 +161,7 @@ color: rgb(255, 255, 255);</string>
      <addaction name="actionPlayer_vs_Player"/>
     </widget>
     <addaction name="menuNewGame"/>
+    <addaction name="actionHighscore"/>
     <addaction name="actionSettings"/>
     <addaction name="exit"/>
    </widget>
@@ -184,6 +185,11 @@ color: rgb(255, 255, 255);</string>
   <action name="actionSettings">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionHighscore">
+   <property name="text">
+    <string>Highscore</string>
    </property>
   </action>
  </widget>
