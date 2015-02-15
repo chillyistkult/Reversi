@@ -1,0 +1,217 @@
+\hypertarget{class_game}{}\section{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+Inheritance diagram for Game\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_game_a206137b58ccb5c275619d08a9e90be37}{handle\+Cell\+Clicked} (\hyperlink{struct_board_position}{Board\+Position} where)
+\item 
+Q\+String \hyperlink{class_game_a5b70ad0ec696020171207825eb1915e4}{get\+Player\+Name1} ()
+\item 
+Q\+String \hyperlink{class_game_a03d0a6aedd4026beb2904243f0461778}{get\+Player\+Name2} ()
+\item 
+C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E \hyperlink{class_game_a47199b797f99bc4bbc86f286de480a5b}{get\+Players\+Token} ()
+\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_game_a5d0ab94b5dca041df4288469002e56d4}{}void {\bfseries turn\+Taken} (C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E by\+Whom, C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E next\+Turn)\label{class_game_a5d0ab94b5dca041df4288469002e56d4}
+
+\item 
+\hypertarget{class_game_aaf6e4b840c1f2f3eae0fb2cbbe6ab735}{}void {\bfseries score\+Changed} (int white, int black)\label{class_game_aaf6e4b840c1f2f3eae0fb2cbbe6ab735}
+
+\item 
+\hypertarget{class_game_a9930b90b8152f151b13b5183081d76f4}{}void {\bfseries game\+Over} (C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E winner, int white, int black)\label{class_game_a9930b90b8152f151b13b5183081d76f4}
+
+\item 
+\hypertarget{class_game_a6f45946e78016e8c0bdf6abb49f39a1a}{}void {\bfseries update\+Progress} (int value)\label{class_game_a6f45946e78016e8c0bdf6abb49f39a1a}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_a01b855252c781b0d505fb1b10677e92c}{Game} (int board\+Size, int difficulty, int style, Q\+String player\+Name1, Q\+String player\+Name2)
+\item 
+\hyperlink{class_game_acaa1a5a4ced79038d3934dac0db2ae19}{Game} (C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E player, int board\+Size, int difficulty, int style, Q\+String player\+Name1)
+\item 
+\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{$\sim$\+Game} ()
+\item 
+Q\+Shared\+Pointer$<$ \hyperlink{class_board}{Board} $>$ \hyperlink{class_game_ab12d33e6057472bd111519b36bcf5842}{get\+Board} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_game_a59cb874cb0fa9c47f4197612d9bade93}{set\+Board} (Q\+Shared\+Pointer$<$ \hyperlink{class_board}{Board} $>$ n\+Board)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_a01b855252c781b0d505fb1b10677e92c}{}\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection[{Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\+::\+Game (
+\begin{DoxyParamCaption}
+\item[{int}]{board\+Size, }
+\item[{int}]{difficulty, }
+\item[{int}]{style, }
+\item[{Q\+String}]{player\+Name1, }
+\item[{Q\+String}]{player\+Name2}
+\end{DoxyParamCaption}
+)}\label{class_game_a01b855252c781b0d505fb1b10677e92c}
+Initialize a player vs player game
+
+
+\begin{DoxyParams}{Parameters}
+{\em board\+Size} & \\
+\hline
+{\em difficulty} & \\
+\hline
+{\em style} & \\
+\hline
+{\em player\+Name1} & \\
+\hline
+{\em player\+Name2} & \\
+\hline
+{\em board\+Size} & \\
+\hline
+{\em difficulty} & \\
+\hline
+{\em style} & \\
+\hline
+{\em player\+Name1} & \\
+\hline
+{\em player\+Name2} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_acaa1a5a4ced79038d3934dac0db2ae19}{}\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection[{Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\+::\+Game (
+\begin{DoxyParamCaption}
+\item[{C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E}]{player, }
+\item[{int}]{board\+Size, }
+\item[{int}]{difficulty, }
+\item[{int}]{style, }
+\item[{Q\+String}]{player\+Name1}
+\end{DoxyParamCaption}
+)}\label{class_game_acaa1a5a4ced79038d3934dac0db2ae19}
+Initialize a player vs computer game
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & \\
+\hline
+{\em board\+Size} & \\
+\hline
+{\em difficulty} & \\
+\hline
+{\em style} & \\
+\hline
+{\em player\+Name1} & \\
+\hline
+{\em player} & \\
+\hline
+{\em board\+Size} & \\
+\hline
+{\em difficulty} & \\
+\hline
+{\em style} & \\
+\hline
+{\em player\+Name1} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_ae3d112ca6e0e55150d2fdbc704474530}{}\index{Game@{Game}!````~Game@{$\sim$\+Game}}
+\index{````~Game@{$\sim$\+Game}!Game@{Game}}
+\subsubsection[{$\sim$\+Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\+::$\sim$\+Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_game_ae3d112ca6e0e55150d2fdbc704474530}
+Destructor Removes all database connections 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_ab12d33e6057472bd111519b36bcf5842}{}\index{Game@{Game}!get\+Board@{get\+Board}}
+\index{get\+Board@{get\+Board}!Game@{Game}}
+\subsubsection[{get\+Board}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Shared\+Pointer$<$ {\bf Board} $>$ Game\+::get\+Board (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_game_ab12d33e6057472bd111519b36bcf5842}
+Gets actual reference of the board
+
+\begin{DoxyReturn}{Returns}
+Q\+Shared\+Pointer$<$\+Board$>$ 
+\end{DoxyReturn}
+\hypertarget{class_game_a5b70ad0ec696020171207825eb1915e4}{}\index{Game@{Game}!get\+Player\+Name1@{get\+Player\+Name1}}
+\index{get\+Player\+Name1@{get\+Player\+Name1}!Game@{Game}}
+\subsubsection[{get\+Player\+Name1}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Game\+::get\+Player\+Name1 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\label{class_game_a5b70ad0ec696020171207825eb1915e4}
+Get the name of player 1
+
+\begin{DoxyReturn}{Returns}
+Q\+String 
+\end{DoxyReturn}
+\hypertarget{class_game_a03d0a6aedd4026beb2904243f0461778}{}\index{Game@{Game}!get\+Player\+Name2@{get\+Player\+Name2}}
+\index{get\+Player\+Name2@{get\+Player\+Name2}!Game@{Game}}
+\subsubsection[{get\+Player\+Name2}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Game\+::get\+Player\+Name2 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\label{class_game_a03d0a6aedd4026beb2904243f0461778}
+Get the name of player 2
+
+\begin{DoxyReturn}{Returns}
+Q\+String 
+\end{DoxyReturn}
+\hypertarget{class_game_a47199b797f99bc4bbc86f286de480a5b}{}\index{Game@{Game}!get\+Players\+Token@{get\+Players\+Token}}
+\index{get\+Players\+Token@{get\+Players\+Token}!Game@{Game}}
+\subsubsection[{get\+Players\+Token}]{\setlength{\rightskip}{0pt plus 5cm}C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E Game\+::get\+Players\+Token (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\label{class_game_a47199b797f99bc4bbc86f286de480a5b}
+Get the token of the player (W\+H\+I\+T\+E or B\+L\+A\+C\+K) Is used in player vs computer game mode
+
+\begin{DoxyReturn}{Returns}
+C\+E\+L\+L\+\_\+\+S\+T\+A\+T\+E 
+\end{DoxyReturn}
+\hypertarget{class_game_a206137b58ccb5c275619d08a9e90be37}{}\index{Game@{Game}!handle\+Cell\+Clicked@{handle\+Cell\+Clicked}}
+\index{handle\+Cell\+Clicked@{handle\+Cell\+Clicked}!Game@{Game}}
+\subsubsection[{handle\+Cell\+Clicked}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::handle\+Cell\+Clicked (
+\begin{DoxyParamCaption}
+\item[{{\bf Board\+Position}}]{where}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\label{class_game_a206137b58ccb5c275619d08a9e90be37}
+Cell clicked event
+
+
+\begin{DoxyParams}{Parameters}
+{\em where} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_game_a59cb874cb0fa9c47f4197612d9bade93}{}\index{Game@{Game}!set\+Board@{set\+Board}}
+\index{set\+Board@{set\+Board}!Game@{Game}}
+\subsubsection[{set\+Board}]{\setlength{\rightskip}{0pt plus 5cm}void Game\+::set\+Board (
+\begin{DoxyParamCaption}
+\item[{Q\+Shared\+Pointer$<$ {\bf Board} $>$}]{n\+Board}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{class_game_a59cb874cb0fa9c47f4197612d9bade93}
+Initialize new board and connect signals / slots
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Board} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+game.\+h\item 
+game.\+cpp\end{DoxyCompactItemize}

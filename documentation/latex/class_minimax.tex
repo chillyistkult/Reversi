@@ -1,0 +1,85 @@
+\hypertarget{class_minimax}{}\section{Minimax Class Reference}
+\label{class_minimax}\index{Minimax@{Minimax}}
+Inheritance diagram for Minimax\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_minimax}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_minimax_a7562b56f3c805f0732cd04ff575a649b}{}void {\bfseries update\+Progress} (int value)\label{class_minimax_a7562b56f3c805f0732cd04ff575a649b}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_minimax_a9d2f91d5a6a7b582d095f1ff30454754}{Minimax} (Q\+Shared\+Pointer$<$ \hyperlink{class_board}{Board} $>$ root\+Node, int max\+Depth)
+\item 
+virtual \hyperlink{class_minimax_ac88b5b70cb204684d2a33bbc5e815d9a}{$\sim$\+Minimax} ()
+\item 
+int \hyperlink{class_minimax_a73a16d428768b37ac6377d4450acfb48}{search} ()
+\item 
+\hyperlink{struct_board_position}{Board\+Position} \hyperlink{class_minimax_ab78e32e5568d4f023775aa55d2f0b613}{get\+Best\+Move} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_minimax_a9d2f91d5a6a7b582d095f1ff30454754}{}\index{Minimax@{Minimax}!Minimax@{Minimax}}
+\index{Minimax@{Minimax}!Minimax@{Minimax}}
+\subsubsection[{Minimax}]{\setlength{\rightskip}{0pt plus 5cm}Minimax\+::\+Minimax (
+\begin{DoxyParamCaption}
+\item[{Q\+Shared\+Pointer$<$ {\bf Board} $>$}]{root\+Node, }
+\item[{int}]{max\+Depth}
+\end{DoxyParamCaption}
+)}\label{class_minimax_a9d2f91d5a6a7b582d095f1ff30454754}
+Constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em root\+Node} & \\
+\hline
+{\em max\+Depth} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_minimax_ac88b5b70cb204684d2a33bbc5e815d9a}{}\index{Minimax@{Minimax}!````~Minimax@{$\sim$\+Minimax}}
+\index{````~Minimax@{$\sim$\+Minimax}!Minimax@{Minimax}}
+\subsubsection[{$\sim$\+Minimax}]{\setlength{\rightskip}{0pt plus 5cm}Minimax\+::$\sim$\+Minimax (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_minimax_ac88b5b70cb204684d2a33bbc5e815d9a}
+Desctructor 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_minimax_ab78e32e5568d4f023775aa55d2f0b613}{}\index{Minimax@{Minimax}!get\+Best\+Move@{get\+Best\+Move}}
+\index{get\+Best\+Move@{get\+Best\+Move}!Minimax@{Minimax}}
+\subsubsection[{get\+Best\+Move}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Board\+Position} Minimax\+::get\+Best\+Move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_minimax_ab78e32e5568d4f023775aa55d2f0b613}
+Just a getter to get the last calculated best move because the algorithm is too heavy to recalculate every single time
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{struct_board_position}{Board\+Position} 
+\end{DoxyReturn}
+\hypertarget{class_minimax_a73a16d428768b37ac6377d4450acfb48}{}\index{Minimax@{Minimax}!search@{search}}
+\index{search@{search}!Minimax@{Minimax}}
+\subsubsection[{search}]{\setlength{\rightskip}{0pt plus 5cm}int Minimax\+::search (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_minimax_a73a16d428768b37ac6377d4450acfb48}
+Search the tree Begins at the root node
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+minimax.\+h\item 
+minimax.\+cpp\end{DoxyCompactItemize}

@@ -20,8 +20,6 @@ SOURCES += main.cpp \
     settingsdialog.cpp \
     minimax.cpp \
     highscore.cpp \
-    test/test1.cpp \
-    test/test2.cpp \
     test/gametest.cpp
 
 TRANSLATIONS = reversi_de.ts
@@ -35,8 +33,6 @@ HEADERS  += mainwindow.h \
     minimax.h \
     highscore.h \
     AutoTest.h \
-    test/test1.h \
-    test/test2.h \
     test/gametest.h
 
 FORMS    += mainwindow.ui \

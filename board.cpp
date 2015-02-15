@@ -8,10 +8,15 @@
 
 #include "minimax.h"
 
-const int cornerPoints = 50;
-const int edgePoints = 2;
+const int cornerPoints = 50; /**< TODO */
+const int edgePoints = 2; /**< TODO */
 
-//Constructor
+/**
+ * Constructor style (0=default, 1=Future, 2=Super Mario)
+ *
+ * @param size
+ * @param style
+ */
 Board::Board(int size, int style) :
     QObject(0),boardSize(size), boardStyle(style), board(0), whiteCount(0), blackPoints(0), boolGameOver(false), whiteCornerPoints(0),
     blackCornerPoints(0), whiteEdgePoints(0),blackEdgePoints(0)
@@ -19,7 +24,11 @@ Board::Board(int size, int style) :
     this->initializeBoard();
 }
 
-//Constructor with old board
+/**
+ * Copy constructor
+ *
+ * @param other
+ */
 Board::Board(const Board & other) :
     QObject(0)
 {
@@ -28,17 +37,20 @@ Board::Board(const Board & other) :
     this->whiteCount = other.getWhitePoints();
     this->blackPoints = other.getBlackPoints();
     this->boolGameOver = other.isGameOver();
-    this->whiteCornerPoints = other.getwhiteCornerPoints();
-    this->blackCornerPoints = other.getblackCornerPoints();
-    this->whiteEdgePoints = other.getwhiteEdgePoints();
-    this->blackEdgePoints = other.getblackEdgePoints();
+    this->whiteCornerPoints = other.getWhiteCornerPoints();
+    this->blackCornerPoints = other.getBlackCornerPoints();
+    this->whiteEdgePoints = other.getWhiteEdgePoints();
+    this->blackEdgePoints = other.getBlackEdgePoints();
 
     const int cells = this->boardSize*this->boardSize;
     this->board = new CELL_STATE[cells];
     memcpy(this->board,other.board,cells*sizeof(CELL_STATE));
 }
 
-//Destructor
+/**
+ * Destructor
+ *
+ */
 Board::~Board()
 {
     if (this->board != 0) {
@@ -46,47 +58,87 @@ Board::~Board()
     }
 }
 
+/**
+ * Get point of WHITE player
+ *
+ * @return int
+ */
 int Board::getWhitePoints() const
 {
     return this->whiteCount;
 }
 
+/**
+ * Get point of BLACK player
+ *
+ * @return int
+ */
 int Board::getBlackPoints() const
 {
     return this->blackPoints;
 }
 
-int Board::getwhiteCornerPoints() const
+/**
+ * Get points of WHITE corner count
+ *
+ * @return int
+ */
+int Board::getWhiteCornerPoints() const
 {
     return this->whiteCornerPoints;
 }
 
-int Board::getblackCornerPoints() const
+/**
+ * Get points of BLACK corner count
+ *
+ * @return int
+ */
+int Board::getBlackCornerPoints() const
 {
     return this->blackCornerPoints;
 }
 
-int Board::getwhiteEdgePoints() const
+/**
+ * Get points of WHITE edge count
+ *
+ * @return int
+ */
+int Board::getWhiteEdgePoints() const
 {
     return this->whiteEdgePoints;
 }
 
-int Board::getblackEdgePoints() const
+/**
+ * Get points of BLACK edge count
+ *
+ * @return int
+ */
+int Board::getBlackEdgePoints() const
 {
     return this->blackEdgePoints;
 }
 
-//Calculates overall score
+/**
+ * Get overall score, calculated from edge, base and corner count
+ * Was meant to be used in highscore view
+ *
+ * @return int
+ */
 int Board::getScore() const
 {
     const int basic = this->getWhitePoints() - this->getBlackPoints();
-    const int edges = this->getwhiteEdgePoints() * edgePoints - this->getblackEdgePoints() * edgePoints;
-    const int corners = (cornerPoints*this->getwhiteCornerPoints()) - (cornerPoints*this->getblackCornerPoints());
+    const int edges = this->getWhiteEdgePoints() * edgePoints - this->getBlackEdgePoints() * edgePoints;
+    const int corners = (cornerPoints*this->getWhiteCornerPoints()) - (cornerPoints*this->getBlackCornerPoints());
     const int score = basic + corners + edges;
     return corners;
 }
 
-//Get valid moves by player
+/**
+ * Get a list of valid moves by player
+ *
+ * @param player
+ * @return QList<BoardPosition>
+ */
 QList<BoardPosition> Board::getValidMoves(CELL_STATE player) const
 {
     QList<BoardPosition> validMoves;
@@ -102,7 +154,14 @@ QList<BoardPosition> Board::getValidMoves(CELL_STATE player) const
     return validMoves;
 }
 
-//Is move allowed?
+/**
+ * Checks if the move at a specific position by an specific player is valid
+ *
+ * @param position
+ * @param player
+ * @param flips
+ * @return bool
+ */
 bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPosition> * flips) const
 {
     Q_UNUSED(flips);
@@ -116,6 +175,8 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
     const CELL_STATE enemy = this->getEnemyOf(player);
 
     bool valid = false;
+
+    //TODO: Improve algorithm
 
     //Check move left
     {
@@ -330,7 +391,13 @@ bool Board::isValidMove(BoardPosition position,CELL_STATE player, QList<BoardPos
     return valid;
 }
 
-//Does a move by player at a specific position
+/**
+ * Does a move to a specific position by player
+ *
+ * @param position
+ * @param player
+ * @return bool
+ */
 bool Board::makeMove(BoardPosition position, CELL_STATE player)
 {
     if (player != this->getWhoIsNext())
@@ -405,41 +472,78 @@ bool Board::makeMove(BoardPosition position, CELL_STATE player)
     this->whiteEdgePoints = wCount;
     this->blackEdgePoints = bCount;
 
+    this->lastMove = position;
     this->moveMade(player,this->getWhoIsNext());
     return true;
 }
 
+/**
+ * Get board size dimension
+ *
+ * @return int
+ */
 int Board::getBoardSize() const
 {
     return this->boardSize;
 }
 
+/**
+ * Get board style (0=Default, 1=Future, 2=Super Mario)
+ *
+ * @return int
+ */
 int Board::getBoardStyle()
 {
     return this->boardStyle;
 }
 
+/**
+ * Checks if cell is occupied by a player at a specific position
+ *
+ * @param position
+ * @return bool
+ */
 bool Board::isCellOccupied(BoardPosition position) const
 {
     return (this->getCell(position) != EMPTY);
 }
 
+/**
+ * Get the CELL_STATE (0=EMPTY, 1=WHITE, 2=BLACK) at a specific position
+ *
+ * @param position
+ * @return CELL_STATE
+ */
 CELL_STATE Board::getCell(BoardPosition position) const
 {
     return this->board[this->xy2index(position)];
 }
 
+/**
+ * Get who's turn is next
+ *
+ * @return CELL_STATE
+ */
 CELL_STATE Board::getWhoIsNext() const
 {
     return this->whoseNext;
 }
 
+/**
+ * Is the game over?
+ *
+ * @return bool
+ */
 bool Board::isGameOver() const
 {
     return this->boolGameOver;
 }
 
-//Who won?
+/**
+ * Who won?
+ *
+ * @return CELL_STATE
+ */
 CELL_STATE Board::getWinningColor() const
 {
     if (this->getWhitePoints() > this->getBlackPoints())
@@ -451,13 +555,32 @@ CELL_STATE Board::getWinningColor() const
 
 }
 
-//Getter for bestMove
+/**
+ * A getter for the actual calculated best move
+ *
+ * @return BoardPosition
+ */
 BoardPosition Board::getBestMove() const
 {
     return this->bestMove;
 }
 
-//Uses minimax algorithm to calculate best move
+/**
+ * A getter for the last made move
+ *
+ * @return BoardPosition
+ */
+BoardPosition Board::getLastMove() const
+{
+    return this->lastMove;
+}
+
+/**
+ * Calculates best move by using minimax algorithm for a specific player and ai difficulty
+ *
+ * @param player
+ * @param difficulty
+ */
 void Board::calculateBestMove(CELL_STATE player,int difficulty)
 {
 
@@ -472,7 +595,10 @@ void Board::calculateBestMove(CELL_STATE player,int difficulty)
     this->bestMove = minimax.getBestMove();
 }
 
-//Initialize board
+/**
+ * Initialize a new board
+ *
+ */
 void Board::initializeBoard()
 {
     if (this->board != 0)
@@ -504,6 +630,7 @@ void Board::initializeBoard()
     //const BoardPosition temp = {5,3};
 
 
+    //Start positions
     this->board[this->xy2index(ul)] = WHITE;
     this->board[this->xy2index(ur)] = BLACK;
     this->board[this->xy2index(bl)] = BLACK;
@@ -522,20 +649,37 @@ void Board::initializeBoard()
     //this->calculateBestMove(this->getWhoIsNext());
 }
 
-//private
+/**
+ * Gets the absolut postion by BoardPosition
+ *
+ * @param position
+ * @return int
+ */
 int Board::xy2index(BoardPosition position) const
 {
     return position.y*this->getBoardSize() + position.x;
 }
 
-//private
+/**
+ * Gets the absolut postion by x and y coordinates
+ *
+ * @param x
+ * @param y
+ * @return int
+ */
 int Board::xy2index(int x, int y) const
 {
     return y*this->getBoardSize() + x;
 }
 
-
-//private
+/**
+ * Get's the enemey of a player
+ * Need this for valid move and makeMove methods
+ *
+ *
+ * @param color
+ * @return CELL_STATE
+ */
 CELL_STATE Board::getEnemyOf(CELL_STATE color) const
 {
     if (color == WHITE)
@@ -545,7 +689,13 @@ CELL_STATE Board::getEnemyOf(CELL_STATE color) const
     return EMPTY;
 }
 
-//private
+/**
+ * Get all cells between two BoardPostions as a list
+ *
+ * @param p1
+ * @param p2
+ * @return QList<BoardPosition>
+ */
 QList<BoardPosition> Board::getCellsBetween(BoardPosition p1, BoardPosition p2) const
 {
     QList<BoardPosition> toRet;
@@ -576,14 +726,23 @@ QList<BoardPosition> Board::getCellsBetween(BoardPosition p1, BoardPosition p2) 
     return toRet;
 }
 
-//private
+/**
+ * Set a cell at a specific postion to a given color (WHITE or BLACK)
+ *
+ * @param position
+ * @param color
+ */
 void Board::setCell(BoardPosition position, CELL_STATE color)
 {
     this->board[this->xy2index(position)] = color;
     this->boardChanged();
 }
 
-//private
+/**
+ * Increments points for a given player
+ *
+ * @param color
+ */
 void Board::incrementCount(CELL_STATE color)
 {
     if (color == EMPTY)
@@ -595,7 +754,11 @@ void Board::incrementCount(CELL_STATE color)
     this->scoreChanged(this->getWhitePoints(),this->getBlackPoints());
 }
 
-//private
+/**
+ * Decrement points for a given player
+ *
+ * @param color
+ */
 void Board::decrementCount(CELL_STATE color)
 {
     if (color == EMPTY) {

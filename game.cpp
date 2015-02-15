@@ -8,8 +8,30 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QFuture>
+#include <QFutureWatcher>
+#include <QtConcurrent/QtConcurrentRun>
 
-//Constructor Player vs. Player
+
+using namespace QtConcurrent;
+/**
+ * Initialize a player vs player game
+ *
+ * @param boardSize
+ * @param difficulty
+ * @param style
+ * @param playerName1
+ * @param playerName2
+ */
+/**
+ * @brief
+ *
+ * @param boardSize
+ * @param difficulty
+ * @param style
+ * @param playerName1
+ * @param playerName2
+ */
 Game::Game(int boardSize, int difficulty, int style, QString playerName1, QString playerName2)
 {
     if(playerName1.isEmpty()) {
@@ -29,6 +51,24 @@ Game::Game(int boardSize, int difficulty, int style, QString playerName1, QStrin
 }
 
 //Constructor Player vs. Computer
+/**
+ * Initialize a player vs computer game
+ *
+ * @param player
+ * @param boardSize
+ * @param difficulty
+ * @param style
+ * @param playerName1
+ */
+/**
+ * @brief
+ *
+ * @param player
+ * @param boardSize
+ * @param difficulty
+ * @param style
+ * @param playerName1
+ */
 Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString playerName1) : player(player)
 {
     if(playerName1.isEmpty()) {
@@ -50,7 +90,12 @@ Game::Game(CELL_STATE player, int boardSize, int difficulty, int style, QString 
     this->handleTurnTaken(WHITE,this->getBoard()->getWhoIsNext());
 }
 
-//Destructor
+
+/**
+ * Destructor
+ * Removes all database connections
+ *
+ */
 Game::~Game()
 {
     QStringList list = QSqlDatabase::connectionNames();
@@ -59,34 +104,61 @@ Game::~Game()
     }
 }
 
-//Gets actual reference to board
+/**
+ * Gets actual reference of the board
+ *
+ * @return QSharedPointer<Board>
+ */
 QSharedPointer<Board> Game::getBoard() const
 {
     return this->board;
 }
 
-//Get players token
+/**
+ * Get the token of the player (WHITE or BLACK)
+ * Is used in player vs computer game mode
+ *
+ * @return CELL_STATE
+ */
 CELL_STATE Game::getPlayersToken() {
     return this->player;
 }
 
-//Get player name
+/**
+ * Get the name of player 1
+ *
+ * @return QString
+ */
 QString Game::getPlayerName1() {
     return this->playerName1;
 }
 
-//Get player name
+/**
+ * Get the name of player 2
+ *
+ * @return QString
+ */
 QString Game::getPlayerName2() {
     return this->playerName2;
 }
 
-//Cell clicked slot
+/**
+ * Cell clicked event
+ *
+ * @param where
+ */
 void Game::handleCellClicked(BoardPosition where)
 {
     this->board->makeMove(where, this->board->getWhoIsNext());
 }
 
-//Handle turn taken
+/**
+ * Turn taken event
+ * By whom is the turn taken and who has the next turn?
+ *
+ * @param byWhom
+ * @param nextTurn
+ */
 void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
 {
     if (this->getBoard()->isGameOver()) {
@@ -94,35 +166,59 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
     }
     if (nextTurn == this->aiPlayer)
     {
-        QTimer::singleShot(50,this,SLOT(makeAIMove()));
+        QFutureWatcher<void> watcher;
+        QFuture<void> future = QtConcurrent::run(this,&Game::makeAIMove);
+        watcher.setFuture(future);
     }
 }
 
-//Game over slot
+/**
+ * Game over event
+ *
+ * @param winner
+ * @param white
+ * @param black
+ */
 void Game::handleGameOver(CELL_STATE winner, int white, int black)
 {
     this->saveHighscore(white, black);
     //this->gameOver(winner);
 }
 
-//Score changed slot
+/**
+ * Score changed event
+ *
+ * @param white
+ * @param black
+ */
 void Game::handleScoreChanged(int white, int black)
 {
     //this->scoreChanged(white,black);
 }
 
-//Make AI turn
+/**
+ * Does a ai move (calculates best move)
+ *
+ */
 void Game::makeAIMove()
 {
+    this->updateProgress(0);
     if (this->aiPlayer == BLACK) {
             this->getBoard()->calculateBestMove(this->aiPlayer, difficulty);
     }
     if (this->aiPlayer == WHITE) {
             this->getBoard()->calculateBestMove(this->aiPlayer, difficulty);
     }
+    this->updateProgress(10);
     this->getBoard()->makeMove(this->getBoard()->getBestMove(),this->aiPlayer);
 }
 
+/**
+ * Saves the highscore after a game is over
+ *
+ * @param white
+ * @param black
+ */
 void Game::saveHighscore(int white, int black)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "Highscore");
@@ -145,7 +241,11 @@ void Game::saveHighscore(int white, int black)
     db.close();
 }
 
-//Initialize new board and connect signals / slots
+/**
+ * Initialize new board and connect signals / slots
+ *
+ * @param nBoard
+ */
 void Game::setBoard(QSharedPointer<Board> nBoard)
 {
     if (nBoard.isNull()) {

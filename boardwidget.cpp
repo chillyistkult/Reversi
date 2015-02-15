@@ -7,23 +7,49 @@
 
 #include "minimax.h"
 
+/**
+ * Constructor
+ *
+ * @param board
+ * @param parent
+ */
 BoardWidget::BoardWidget(QSharedPointer<Board> board, QWidget *parent) :
     QWidget(parent), showPossibleWhite(false), showPossibleBlack(false)
 {
     this->setBoard(board);
 }
 
+/**
+ * Constructor with no board initialized
+ *
+ * @param parent
+ */
 BoardWidget::BoardWidget(QWidget *parent) :
     QWidget(parent), showPossibleWhite(false), showPossibleBlack(false)
 {
 
 }
 
+/**
+ * Get the size of the board in pixel
+ *
+ * @return QSize
+ */
+/**
+ * @brief
+ *
+ * @return QSize
+ */
 QSize BoardWidget::sizeHint() const
 {
     return QSize(800,800);
 }
 
+/**
+ * Initialize a given board
+ *
+ * @param board
+ */
 void BoardWidget::setBoard(QSharedPointer<Board> board)
 {
     this->board = board;
@@ -36,11 +62,22 @@ void BoardWidget::setBoard(QSharedPointer<Board> board)
     this->update();
 }
 
+/**
+ * Get the actual board
+ *
+ * @return QSharedPointer<Board>
+ */
 QSharedPointer<Board> BoardWidget::getBoard() const
 {
     return this->board;
 }
 
+/**
+ * Main paint event
+ * Here happens all the magic like drawing the board, drawing the tokens and so on
+ *
+ * @param
+ */
 void BoardWidget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -184,9 +221,11 @@ void BoardWidget::paintEvent(QPaintEvent *)
 
 
     painter.setPen(Qt::green);
-    painter.setBrush(QBrush(whiteChipColor));
     if (this->board->getWhoIsNext() == BLACK) {
-        painter.setBrush(blackChipColor);
+        painter.setBrush(QBrush(blackChipColor));
+    }
+    else {
+        painter.setBrush(QBrush(whiteChipColor));
     }
     for (int x = 0; x < cells; x++)
     {
@@ -201,7 +240,7 @@ void BoardWidget::paintEvent(QPaintEvent *)
     }
 
     BoardPosition bestMove = this->getBoard()->getBestMove();
-    painter.setBrush(QBrush(Qt::red));
+    painter.setBrush(QBrush(Qt::blue));
     painter.drawEllipse(QPoint(cellSize*bestMove.x + cellSize/2, cellSize*bestMove.y + cellSize/2),5,5);
 
     if (this->getBoard()->getWhoIsNext() == WHITE && !this->showPossibleWhite) {
@@ -215,7 +254,11 @@ void BoardWidget::paintEvent(QPaintEvent *)
     }
 }
 
-//Get boardPosition
+/**
+ * Calls cell clicked event when mouse is released above a cell
+ *
+ * @param event
+ */
 void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
 {
     if (this->board.isNull())
@@ -252,6 +295,11 @@ void BoardWidget::mouseReleaseEvent(QMouseEvent * event)
     this->cellClicked(boardPosition);
 }
 
+/**
+ * Is needed to prevent mouse spam behaviour in mouseReleaseEvent
+ *
+ * @param event
+ */
 void BoardWidget::mousePressEvent(QMouseEvent * event)
 {
     this->lastMousePressPosition = event->pos();

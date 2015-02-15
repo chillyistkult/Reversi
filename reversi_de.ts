@@ -37,12 +37,12 @@
     <message>
         <location filename="gamedialog.ui" line="43"/>
         <source>Player 2:</source>
-        <translation>Spieler 1:</translation>
+        <translation type="unfinished">Spieler 2:</translation>
     </message>
     <message>
         <location filename="gamedialog.ui" line="57"/>
         <source>Player 1:</source>
-        <translation>Spieler 2:</translation>
+        <translation type="unfinished">Spieler1:</translation>
     </message>
     <message>
         <location filename="gamedialog.ui" line="86"/>
@@ -152,7 +152,7 @@
         <location filename="mainwindow.cpp" line="40"/>
         <location filename="mainwindow.cpp" line="44"/>
         <source> wins with </source>
-        <translation>gewinnt mit</translation>
+        <translation type="unfinished"> gewinnt mit </translation>
     </message>
 </context>
 <context>

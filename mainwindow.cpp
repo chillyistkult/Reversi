@@ -9,28 +9,45 @@
 #include <QSound>
 
 
-//Constructor
+/**
+ * Constructor
+ *
+ * @param parent
+ */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->progressBar->setValue(0);
 }
 
-//Destructor
+/**
+ * Destructor
+ *
+ */
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
-//Score changed and status bar gets updated
+/**
+ * Score changed and status bar gets updated
+ *
+ * @param white
+ * @param black
+ */
 void MainWindow::countChange(int white, int black)
 {
     this->ui->statusBar->showMessage(game->getPlayerName1() + ": " + QString::number(white) + "  " + game->getPlayerName2() + ": " + QString::number(black));
 }
 
-//Game over event signal
+/**
+ * Game over event signal
+ *
+ * @param CELL_STATE
+ * @param white
+ * @param black
+ */
 void MainWindow::gameOver(CELL_STATE, int white, int black)
 {
     int whiteScore = this->game->getBoard()->getWhitePoints();
@@ -49,13 +66,16 @@ void MainWindow::gameOver(CELL_STATE, int white, int black)
 
 }
 
-//Click on Player vs. Player menue point
+/**
+ * Click on Player vs. Player menue point
+ *
+ */
 void MainWindow::on_actionPlayer_vs_Player_triggered()
 {
     SettingsDialog settings(this);
     GameDialog gameDialog(this);
     gameDialog.enablePlayer2Input();
-    gameDialog.exec();
+    if(gameDialog.exec()==1) {
     this->setGame(QSharedPointer<Game>(new Game(
                                           gameDialog.getBoardSize(),
                                           gameDialog.getDifficulty(),
@@ -63,14 +83,19 @@ void MainWindow::on_actionPlayer_vs_Player_triggered()
                                           gameDialog.getPlayerName1(),
                                           gameDialog.getPlayerName2()
                                         )));
+    }
 }
 
-//Click on Player vs. Computer menue point
+
+/**
+ * Click on Player vs. Computer menue point
+ *
+ */
 void MainWindow::on_actionPlayer_vs_Computer_triggered()
 {
     SettingsDialog settings(this);
     GameDialog gameDialog(this);
-    gameDialog.exec();
+    if(gameDialog.exec()==1) {
     this->setGame(QSharedPointer<Game>(new Game(
                                           gameDialog.getToken(),
                                           gameDialog.getBoardSize(),
@@ -78,23 +103,38 @@ void MainWindow::on_actionPlayer_vs_Computer_triggered()
                                           settings.settings().style,
                                           gameDialog.getPlayerName1()
                                       )));
+    }
 }
 
-//Click on settings
+/**
+ * Click on settings
+ *
+ */
+/**
+ * @brief
+ *
+ */
 void MainWindow::on_actionSettings_triggered()
 {
     SettingsDialog settings(this);
     settings.exec();
 }
 
-//Click on settings
+/**
+ * Click on highscore
+ *
+ */
 void MainWindow::on_actionHighscore_triggered()
 {
     Highscore highscore(this);
     highscore.exec();
 }
 
-//Initialize slots and signal for new game
+/**
+ * Initialize slots and signal for new game
+ *
+ * @param game
+ */
 void MainWindow::setGame(QSharedPointer<Game> game)
 {
     this->ui->widget->setBoard(game->getBoard());
@@ -114,27 +154,25 @@ void MainWindow::setGame(QSharedPointer<Game> game)
             SLOT(countChange(int,int)));
     connect(raw,
             SIGNAL( updateProgress(int) ),
-            this->ui->progressBar,
-            SLOT( setValue(int) ) );
+            this,
+            SLOT( updateProgressBar(int) ) );
     this->game = game;
 }
 
-//Exit event
+/**
+ * Exit event
+ *
+ */
 void MainWindow::on_exit_triggered()
 {
     this->close();
 }
 
-void MainWindow::on_progressBar_destroyed()
-{
-
-}
-
-//Update progress bar event
-void MainWindow::updateProgressBar(int value) {
-    this->ui->progressBar->setValue(value);
-}
-
+/**
+ * Change event (need for runtime translation but doesn't work atm)
+ *
+ * @param event
+ */
 void MainWindow::changeEvent(QEvent* event)
 {
     if (event->type() == QEvent::LanguageChange)

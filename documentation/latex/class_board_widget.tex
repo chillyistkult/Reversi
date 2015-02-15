@@ -1,0 +1,161 @@
+\hypertarget{class_board_widget}{}\section{Board\+Widget Class Reference}
+\label{class_board_widget}\index{Board\+Widget@{Board\+Widget}}
+Inheritance diagram for Board\+Widget\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_board_widget}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_board_widget_adba731e80188fa0e43e925978997d2ce}{}void {\bfseries cell\+Clicked} (const \hyperlink{struct_board_position}{Board\+Position} cell)\label{class_board_widget_adba731e80188fa0e43e925978997d2ce}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_board_widget_a260ca35e417d25cc3e27401825793140}{Board\+Widget} (Q\+Shared\+Pointer$<$ \hyperlink{class_board}{Board} $>$ board, Q\+Widget $\ast$parent=0)
+\item 
+\hyperlink{class_board_widget_a532acccc2b203b2418e2b0bc358d7886}{Board\+Widget} (Q\+Widget $\ast$parent=0)
+\item 
+Q\+Size \hyperlink{class_board_widget_a86fa804cef03ad6ba2ee9f7b7b5323eb}{size\+Hint} () const 
+\item 
+void \hyperlink{class_board_widget_a0e0b3f9a57f30fd7aa13fab160cc91c1}{set\+Board} (Q\+Shared\+Pointer$<$ \hyperlink{class_board}{Board} $>$ board)
+\item 
+Q\+Shared\+Pointer$<$ \hyperlink{class_board}{Board} $>$ \hyperlink{class_board_widget_a34253aacadef1560220ead326bfc469d}{get\+Board} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_board_widget_a634c28449979224320c787c771e5f1e5}{paint\+Event} (Q\+Paint\+Event $\ast$)
+\item 
+void \hyperlink{class_board_widget_afd5248764d8f9e334060870e676b41e7}{mouse\+Release\+Event} (Q\+Mouse\+Event $\ast$)
+\item 
+void \hyperlink{class_board_widget_a8c5fec911b5c86c37f5adba5f1be9aec}{mouse\+Press\+Event} (Q\+Mouse\+Event $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_board_widget_a260ca35e417d25cc3e27401825793140}{}\index{Board\+Widget@{Board\+Widget}!Board\+Widget@{Board\+Widget}}
+\index{Board\+Widget@{Board\+Widget}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{Board\+Widget}]{\setlength{\rightskip}{0pt plus 5cm}Board\+Widget\+::\+Board\+Widget (
+\begin{DoxyParamCaption}
+\item[{Q\+Shared\+Pointer$<$ {\bf Board} $>$}]{board, }
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\label{class_board_widget_a260ca35e417d25cc3e27401825793140}
+Constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & \\
+\hline
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_board_widget_a532acccc2b203b2418e2b0bc358d7886}{}\index{Board\+Widget@{Board\+Widget}!Board\+Widget@{Board\+Widget}}
+\index{Board\+Widget@{Board\+Widget}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{Board\+Widget}]{\setlength{\rightskip}{0pt plus 5cm}Board\+Widget\+::\+Board\+Widget (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{class_board_widget_a532acccc2b203b2418e2b0bc358d7886}
+Constructor with no board initialized
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_board_widget_a34253aacadef1560220ead326bfc469d}{}\index{Board\+Widget@{Board\+Widget}!get\+Board@{get\+Board}}
+\index{get\+Board@{get\+Board}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{get\+Board}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Shared\+Pointer$<$ {\bf Board} $>$ Board\+Widget\+::get\+Board (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_board_widget_a34253aacadef1560220ead326bfc469d}
+Get the actual board
+
+\begin{DoxyReturn}{Returns}
+Q\+Shared\+Pointer$<$\+Board$>$ 
+\end{DoxyReturn}
+\hypertarget{class_board_widget_a8c5fec911b5c86c37f5adba5f1be9aec}{}\index{Board\+Widget@{Board\+Widget}!mouse\+Press\+Event@{mouse\+Press\+Event}}
+\index{mouse\+Press\+Event@{mouse\+Press\+Event}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{mouse\+Press\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+Widget\+::mouse\+Press\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{class_board_widget_a8c5fec911b5c86c37f5adba5f1be9aec}
+Is needed to prevent mouse spam behaviour in mouse\+Release\+Event
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_board_widget_afd5248764d8f9e334060870e676b41e7}{}\index{Board\+Widget@{Board\+Widget}!mouse\+Release\+Event@{mouse\+Release\+Event}}
+\index{mouse\+Release\+Event@{mouse\+Release\+Event}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{mouse\+Release\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+Widget\+::mouse\+Release\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Mouse\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{class_board_widget_afd5248764d8f9e334060870e676b41e7}
+Calls cell clicked event when mouse is released above a cell
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_board_widget_a634c28449979224320c787c771e5f1e5}{}\index{Board\+Widget@{Board\+Widget}!paint\+Event@{paint\+Event}}
+\index{paint\+Event@{paint\+Event}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{paint\+Event}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+Widget\+::paint\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Paint\+Event $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{class_board_widget_a634c28449979224320c787c771e5f1e5}
+Main paint event Here happens all the magic like drawing the board, drawing the tokens and so on
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_board_widget_a0e0b3f9a57f30fd7aa13fab160cc91c1}{}\index{Board\+Widget@{Board\+Widget}!set\+Board@{set\+Board}}
+\index{set\+Board@{set\+Board}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{set\+Board}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+Widget\+::set\+Board (
+\begin{DoxyParamCaption}
+\item[{Q\+Shared\+Pointer$<$ {\bf Board} $>$}]{board}
+\end{DoxyParamCaption}
+)}\label{class_board_widget_a0e0b3f9a57f30fd7aa13fab160cc91c1}
+Initialize a given board
+
+
+\begin{DoxyParams}{Parameters}
+{\em board} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_board_widget_a86fa804cef03ad6ba2ee9f7b7b5323eb}{}\index{Board\+Widget@{Board\+Widget}!size\+Hint@{size\+Hint}}
+\index{size\+Hint@{size\+Hint}!Board\+Widget@{Board\+Widget}}
+\subsubsection[{size\+Hint}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Size Board\+Widget\+::size\+Hint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{class_board_widget_a86fa804cef03ad6ba2ee9f7b7b5323eb}
+Get the size of the board in pixel
+
+\begin{DoxyReturn}{Returns}
+Q\+Size 
+
+Q\+Size 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+boardwidget.\+h\item 
+boardwidget.\+cpp\end{DoxyCompactItemize}

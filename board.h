@@ -29,31 +29,24 @@ public:
 
     int getWhitePoints() const;
     int getBlackPoints() const;
-    int getwhiteCornerPoints() const;
-    int getblackCornerPoints() const;
-    int getwhiteEdgePoints() const;
-    int getblackEdgePoints() const;
+    int getWhiteCornerPoints() const;
+    int getBlackCornerPoints() const;
+    int getWhiteEdgePoints() const;
+    int getBlackEdgePoints() const;
     int getScore() const;
-
     QList<BoardPosition> getValidMoves(CELL_STATE player) const;
     bool isValidMove(BoardPosition pos,CELL_STATE player,QList<BoardPosition> * flips=0) const;
     bool makeMove(BoardPosition pos, CELL_STATE player);
-
     int getBoardSize() const;
     int getBoardStyle();
-
     bool isCellOccupied(BoardPosition pos) const;
-
     CELL_STATE getCell(BoardPosition pos) const;
-
     CELL_STATE getWhoIsNext() const;
-
+    CELL_STATE getEnemyOf(CELL_STATE) const;
     bool isGameOver() const;
-
     CELL_STATE getWinningColor() const;
-
     BoardPosition getBestMove() const;
-
+    BoardPosition getLastMove() const;
     void calculateBestMove(CELL_STATE player, int levels);
 
 
@@ -69,7 +62,6 @@ private:
     void initializeBoard();
     int xy2index(BoardPosition pos) const;
     int xy2index(int x, int y) const;
-    CELL_STATE getEnemyOf(CELL_STATE) const;
     QList<BoardPosition> getCellsBetween(BoardPosition p1, BoardPosition p2) const;
     void setCell(BoardPosition position, CELL_STATE color);
     void incrementCount(CELL_STATE color);
@@ -88,6 +80,7 @@ private:
     bool boolGameOver;
 
     BoardPosition bestMove;
+    BoardPosition lastMove;
 };
 
 inline int qHash(const Board & b)

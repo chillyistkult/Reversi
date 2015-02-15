@@ -1,6 +1,10 @@
 #include "gametest.h"
 #include <QDebug>
 
+/**
+ * Constructor
+ *
+ */
 void GameTest::initTestCase()
 {
     this->game = new Game(8, 5, 1, "Luigi", "Mario");
@@ -101,7 +105,6 @@ void GameTest::testGetWhoIsNext()
     QVERIFY(this->board->getWhoIsNext()==1);
     this->initTestCase();
 }
-
 
 void GameTest::cleanupTestCase()
 {

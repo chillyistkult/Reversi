@@ -45,6 +45,7 @@ private slots:
 
     void on_player2CheckBox_clicked(bool checked);
 
+
 private:
     Ui::GameDialog *ui;
     Ui::Settings settings;

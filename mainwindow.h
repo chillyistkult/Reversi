@@ -15,7 +15,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void updateProgressBar(int value);
 
 private slots:
     void countChange(int white, int black);
@@ -24,8 +23,8 @@ private slots:
     void on_actionPlayer_vs_Computer_triggered();
     void on_actionSettings_triggered();
     void on_exit_triggered();
-    void on_progressBar_destroyed();
     void on_actionHighscore_triggered();
+    void updateProgressBar(int value);
 
 protected:
     void changeEvent(QEvent *e);

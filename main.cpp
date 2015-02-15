@@ -11,6 +11,14 @@
 TEST_MAIN
 #else
 //Application entry point
+/**
+ * Holy main method
+ * Initialize tests and translator
+ *
+ * @param argc
+ * @param argv[]
+ * @return int
+ */
 int main(int argc, char *argv[])
 {
 

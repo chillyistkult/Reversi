@@ -4,6 +4,12 @@
 #include <QCoreApplication>
 #include <QtDebug>
 
+/**
+ * Constructor
+ *
+ * @param rootNode
+ * @param maxDepth
+ */
 Minimax::Minimax(QSharedPointer<Board> rootNode,int maxDepth) :
         rootNode(rootNode), maxDepth(maxDepth)
 {
@@ -11,22 +17,39 @@ Minimax::Minimax(QSharedPointer<Board> rootNode,int maxDepth) :
     this->bestMove = bestMove;
 }
 
+/**
+ * Desctructor
+ *
+ */
 Minimax::~Minimax()
 {
 
 }
 
+/**
+ * Search the tree
+ * Begins at the root node
+ *
+ * @return int
+ */
 int Minimax::search()
 {
     return calculate(this->rootNode,0,-10000,10000, 0);
 }
 
-//private
+/**
+ * Evaluates all possible moves and returns best move
+ * http://de.wikipedia.org/wiki/Minimax-Algorithmus
+ *
+ * @param board
+ * @param depth
+ * @param alpha
+ * @param beta
+ * @param level
+ * @return int
+ */
 int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int beta, int level=1)
 {
-
-    //this->updateProgress((100/this->maxDepth)/level);
-
     if (++depth > this->maxDepth || board->isGameOver()) {
         return board->getScore();
     }
@@ -90,6 +113,12 @@ int Minimax::calculate(QSharedPointer<Board> board, int depth, int alpha, int be
     }
 }
 
+/**
+ * Just a getter to get the last calculated best move
+ * because the algorithm is too heavy to recalculate every single time
+ *
+ * @return BoardPosition
+ */
 BoardPosition Minimax::getBestMove() const
 {
     return this->bestMove;

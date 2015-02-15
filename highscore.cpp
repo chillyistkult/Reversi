@@ -5,6 +5,11 @@
 #include <QSqlError>
 #include <QDebug>
 
+/**
+ * Constructor
+ *
+ * @param parent
+ */
 Highscore::Highscore(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Highscore)
@@ -13,6 +18,10 @@ Highscore::Highscore(QWidget *parent) :
     this->load();
 }
 
+/**
+ * Destructor
+ * Removes all database connections
+ */
 Highscore::~Highscore()
 {
     QStringList list = QSqlDatabase::connectionNames();
@@ -22,6 +31,10 @@ Highscore::~Highscore()
     delete ui;
 }
 
+/**
+ * Loads the highscore from database
+ *
+ */
 void Highscore::load()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "Highscore");
