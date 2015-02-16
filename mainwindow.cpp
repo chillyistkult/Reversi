@@ -152,10 +152,6 @@ void MainWindow::setGame(QSharedPointer<Game> game)
             SIGNAL(scoreChanged(int,int)),
             this,
             SLOT(countChange(int,int)));
-    connect(raw,
-            SIGNAL( updateProgress(int) ),
-            this,
-            SLOT( updateProgressBar(int) ) );
     this->game = game;
 }
 

@@ -24,7 +24,6 @@ private slots:
     void on_actionSettings_triggered();
     void on_exit_triggered();
     void on_actionHighscore_triggered();
-    void updateProgressBar(int value);
 
 protected:
     void changeEvent(QEvent *e);

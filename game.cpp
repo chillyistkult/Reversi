@@ -166,9 +166,15 @@ void Game::handleTurnTaken(CELL_STATE byWhom, CELL_STATE nextTurn)
     }
     if (nextTurn == this->aiPlayer)
     {
+
+        QTimer::singleShot(50,this,SLOT(makeAIMove()));
+        /*
+         * Multithreading über QtConcurrent
+         *
         QFutureWatcher<void> watcher;
         QFuture<void> future = QtConcurrent::run(this,&Game::makeAIMove);
         watcher.setFuture(future);
+        */
     }
 }
 
@@ -202,14 +208,12 @@ void Game::handleScoreChanged(int white, int black)
  */
 void Game::makeAIMove()
 {
-    this->updateProgress(0);
     if (this->aiPlayer == BLACK) {
             this->getBoard()->calculateBestMove(this->aiPlayer, difficulty);
     }
     if (this->aiPlayer == WHITE) {
             this->getBoard()->calculateBestMove(this->aiPlayer, difficulty);
     }
-    this->updateProgress(10);
     this->getBoard()->makeMove(this->getBoard()->getBestMove(),this->aiPlayer);
 }
 
@@ -277,10 +281,6 @@ void Game::setBoard(QSharedPointer<Board> nBoard)
             SIGNAL(scoreChanged(int,int)),
             this,
             SIGNAL(scoreChanged(int,int)));
-    connect(raw,
-            SIGNAL(updateProgress(int)),
-            this,
-            SIGNAL(updateProgress(int)));
 
     this->board = nBoard;
 }

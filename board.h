@@ -55,7 +55,6 @@ signals:
     void moveMade(CELL_STATE player, CELL_STATE nextTurn);
     void scoreChanged(int white, int black);
     void gameOver(CELL_STATE winner,int white, int black);
-    void updateProgress(int value);
 
 
 private:
@@ -71,7 +70,7 @@ private:
     CELL_STATE * board;
     CELL_STATE whoseNext;
 
-    int whiteCount;
+    int whitePoints;
     int blackPoints;
     int whiteCornerPoints;
     int blackCornerPoints;

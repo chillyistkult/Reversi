@@ -18,7 +18,7 @@ const int edgePoints = 2; /**< TODO */
  * @param style
  */
 Board::Board(int size, int style) :
-    QObject(0),boardSize(size), boardStyle(style), board(0), whiteCount(0), blackPoints(0), boolGameOver(false), whiteCornerPoints(0),
+    QObject(0),boardSize(size), boardStyle(style), board(0), whitePoints(0), blackPoints(0), boolGameOver(false), whiteCornerPoints(0),
     blackCornerPoints(0), whiteEdgePoints(0),blackEdgePoints(0)
 {
     this->initializeBoard();
@@ -34,7 +34,7 @@ Board::Board(const Board & other) :
 {
     this->boardSize = other.getBoardSize();
     this->whoseNext = other.getWhoIsNext();
-    this->whiteCount = other.getWhitePoints();
+    this->whitePoints = other.getWhitePoints();
     this->blackPoints = other.getBlackPoints();
     this->boolGameOver = other.isGameOver();
     this->whiteCornerPoints = other.getWhiteCornerPoints();
@@ -65,7 +65,7 @@ Board::~Board()
  */
 int Board::getWhitePoints() const
 {
-    return this->whiteCount;
+    return this->whitePoints;
 }
 
 /**
@@ -586,12 +586,7 @@ void Board::calculateBestMove(CELL_STATE player,int difficulty)
 
     QSharedPointer<Board> board(new Board(*this));
     Minimax minimax(board, difficulty);
-    connect(&minimax,
-            SIGNAL(updateProgress(int)),
-            this,
-            SIGNAL(updateProgress(int)));
     minimax.search();
-    this->updateProgress(0);
     this->bestMove = minimax.getBestMove();
 }
 
@@ -640,7 +635,7 @@ void Board::initializeBoard()
     //this->board[this->xy2index(temp)] = WHITE;
 
     this->whoseNext = BLACK;
-    this->whiteCount = 2;
+    this->whitePoints = 2;
     this->blackPoints = 2;
     this->boolGameOver = false;
 
@@ -750,7 +745,7 @@ void Board::incrementCount(CELL_STATE color)
     else if (color == BLACK)
         this->blackPoints++;
     else
-        this->whiteCount++;
+        this->whitePoints++;
     this->scoreChanged(this->getWhitePoints(),this->getBlackPoints());
 }
 
@@ -769,7 +764,7 @@ void Board::decrementCount(CELL_STATE color)
         this->blackPoints--;
     }
     else {
-        this->whiteCount--;
+        this->whitePoints--;
     }
     this->scoreChanged(this->getWhitePoints(),this->getBlackPoints());
 }

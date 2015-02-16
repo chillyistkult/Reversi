@@ -20,7 +20,6 @@ signals:
     void turnTaken(CELL_STATE byWhom, CELL_STATE nextTurn);
     void scoreChanged(int white, int black);
     void gameOver(CELL_STATE winner, int white, int black);
-    void updateProgress(int value);
 
 public slots:
     void handleCellClicked(BoardPosition where);

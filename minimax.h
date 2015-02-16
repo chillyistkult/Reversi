@@ -15,9 +15,6 @@ public:
 
     BoardPosition getBestMove() const;
 
-signals:
-    void updateProgress(int value);
-
 private:
     int calculate(QSharedPointer<Board> board, int depth, int alpha, int beta, int level);
     QSharedPointer<Board> rootNode;
